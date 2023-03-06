@@ -15,7 +15,7 @@ public class Versandhandel {
 			String output = InputUtility.getUserChoice();
 			if (output == "register"){
 				customer = InputUtility.getCompleteRegistration(customer, customerArray);
-				customerArray = Utility.kundeSpeichern(customer, customerArray);
+				customerArray = CustomerManagement.kundeSpeichern(customer, customerArray);
 			} else if (output == "login"){
 				customer = Gui.login(customerArray);
 				Gui.showMenu(customer, carArray);
@@ -24,14 +24,9 @@ public class Versandhandel {
 			} else {
 				System.out.println("Error!");
 			}
-		
 		}
 		
 		Gui.verabschiedung(customer);
-
-		//VehicleClass middlesize = VehicleClass.MIDDLESIZE;
-		//Car car = new Car();
-		//middlesize.
 	}
 	
 	public Customer getCustomer() {

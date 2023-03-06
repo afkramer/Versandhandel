@@ -111,7 +111,6 @@ public class Customer {
 	
 	public String toCSVFormat () {
 		return customerNumber + ";" + firstName + ";" + surname + ";" + street + ";" + houseNumber + ";" + zipCode + ";" + city + ";";
-		 //TODO: Alle Eigenschaften einfügen
 	}
 
 }

@@ -1,7 +1,5 @@
 package Versandhandel;
 public class Car {
-    private static final String CAR_CSV_PATH = "/src/Versandhandel/Car.csv";
-
 	private int productNumber; 
     
     private String productName; 
@@ -9,8 +7,6 @@ public class Car {
     private double productPrice;
         
     private String productDescription;  
-    
-    private double tax = 0.19; 
     
     private VehicleClass category;
     
@@ -54,14 +50,6 @@ public class Car {
     public void setProductDescription(String productDescription) {
     	this.productDescription = productDescription;
     }
-	
-    public double getTax() {
-    	return tax;
-    }
-    
-    public void setTax(double tax) {
-    	this.tax = tax; 
-    }
     
     public VehicleClass getCategory() {
 		return category;
@@ -84,6 +72,10 @@ public class Car {
 
         return sb.toString();
     
+    }
+
+    public String toCSVFormat(){
+        return productNumber + ";" + productName + ";" + productPrice + ";" + productDescription + ";" + category + ";";
     }
 
 } 

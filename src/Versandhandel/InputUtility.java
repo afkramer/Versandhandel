@@ -93,7 +93,7 @@ public class InputUtility {
 		getHouseNumberForRegistration();
 		getZipCodeForRegistration();
 		getPlaceForRegistration();
-		Utility.createCustomerNumber(customer, customerArray);
+		CustomerManagement.createCustomerNumber(customer, customerArray);
 		return customer;
 	}
 
@@ -150,7 +150,7 @@ public class InputUtility {
 					getUserData();
 				} else if (choice == 8) {
 					// Methode zum Löschen
-				}
+				} 
 			} catch (NumberFormatException nfe) {
 				System.out.println("Bitte geben Sie eine Zahl von 1-8 ein.");
 

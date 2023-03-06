@@ -36,7 +36,7 @@ public final class Gui {
 		// TODO: Alle Eingaben über die Utility-Klasse abfragen und dann Customer
 		// erstellen, entweder über Konstruktor oder Costumer-Management
 
-		Utility.createCustomerNumber(customer, customerArray);
+		CustomerManagement.createCustomerNumber(customer, customerArray);
 		System.out.println("Ihre neue Kundennummer lautet: " + customer.getCustomerNumber() + "\n");
 		return customer;
 	}
@@ -55,8 +55,8 @@ public final class Gui {
 
 			try {
 				int kundennummer = InputUtility.getCustomerNumber();
-				if (Utility.isCustomerNumberValid(kundennummer, customerArray)) {
-					customer = Utility.returnCustomer(kundennummer, customerArray);
+				if (CustomerManagement.isCustomerNumberValid(kundennummer, customerArray)) {
+					customer = CustomerManagement.returnCustomer(kundennummer, customerArray);
 					System.out.println("Herzlich Willkommen " + customer.getFirstName() + "");
 					break;
 
@@ -167,11 +167,11 @@ public final class Gui {
 		sb.append(String.format("%26s", ""));
 		sb.append(String.format("%20s", "Zwischensumme Netto:"));
 		sb.append(String.format("%,12.2f€", Utility.totalPrice(quantity, car)
-				- Utility.mehrwertsteuer(Utility.totalPrice(quantity, car), car.getTax())));
+				- Utility.mehrwertsteuer(Utility.totalPrice(quantity, car), CarManagement.TAX)));
 		sb.append("\n");
 		sb.append(String.format("%26s", ""));
 		sb.append(String.format("%20s", "Mehrwertsteuer:"));
-		sb.append(String.format("%,12.2f€", Utility.mehrwertsteuer(Utility.totalPrice(quantity, car), car.getTax())));
+		sb.append(String.format("%,12.2f€", Utility.mehrwertsteuer(Utility.totalPrice(quantity, car), CarManagement.TAX)));
 		sb.append("\n");
 		sb.append(String.format("%26s", ""));
 		sb.append(String.format((new String(new char[35])).replace("\0", "_")));
@@ -183,4 +183,7 @@ public final class Gui {
 		System.out.print(sb);
 	}
 
+	public static void showDeleteErrorMessage() {
+		System.out.println("Der Kunde konnte nicht gelöscht werden. Bitte kontrollieren Sie Ihre Daten noch einmal."); 
+	}
 }
