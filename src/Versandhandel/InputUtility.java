@@ -91,6 +91,22 @@ public class InputUtility {
 		System.out.println("Drücken Sie die Taste 3, wenn Sie weiter einkaufen wollen.");
 		return Integer.parseInt(sc.nextLine());
 	}
+	
+	public static Car getDesiredProduct() {
+		int productNumber;
+		Car car;
+		
+		while (true) {
+			System.out.println("Welches Auto würden Sie gerne kaufen?");
+			System.out.println("Bitte geben Sie die gewünschte Produktnummer ein:");
+			try {
+				productNumber = Integer.parseInt(sc.nextLine());
+				
+			} catch (NumberFormatException nfe) {
+				Gui.showInvalidInputErrorMessage();
+			}
+		}
+	}
 
 	/**
 	 * Die Methode erhält die gewünschte Menge vom Kunden und gibt es zurück.
