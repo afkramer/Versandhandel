@@ -81,8 +81,9 @@ public final class Gui {
 
 				} else if (choice == 3) {
 					showProduct(carArray);
+					Car car = InputUtility.getDesiredProduct(carArray);
 					menge = InputUtility.getAmountOfProducts();
-					showInvoice(customer, carArray[0], menge);
+					showInvoice(customer, car, menge);
 					
 				} else if (choice == 4){
 					//TODO: delete customer, only if the user is an administrator
@@ -171,6 +172,10 @@ public final class Gui {
 		sb.append(String.format("%,12.2f€", CarManagement.totalPrice(quantity, car)));
 		sb.append("\n\n\n");
 		System.out.print(sb);
+	}
+	
+	public static void showProductDoesNotExist() {
+		System.out.println("Diese Produktnummer existiert nicht. Bitte versuchen Sie es erneut.");
 	}
 
 	public static void showDeleteErrorMessage() {

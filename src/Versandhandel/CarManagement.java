@@ -12,7 +12,7 @@ public final class CarManagement {
 		return new Car[] { golf, id3, touran };
 	}
 	
-	public Car findCarByProductNumber(int productNumber, Car[] cars) {
+	public static Car findCarByProductNumber(int productNumber, Car[] cars) {
 		for (int i = 0; i < cars.length; i++) {
 			if (productNumber == cars[i].getProductNumber()) {
 				return cars[i];

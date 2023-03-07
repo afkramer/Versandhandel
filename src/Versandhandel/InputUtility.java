@@ -92,7 +92,7 @@ public class InputUtility {
 		return Integer.parseInt(sc.nextLine());
 	}
 	
-	public static Car getDesiredProduct() {
+	public static Car getDesiredProduct(Car[] cars) {
 		int productNumber;
 		Car car;
 		
@@ -101,7 +101,12 @@ public class InputUtility {
 			System.out.println("Bitte geben Sie die gewünschte Produktnummer ein:");
 			try {
 				productNumber = Integer.parseInt(sc.nextLine());
-				
+				car = CarManagement.findCarByProductNumber(productNumber, cars);
+				if (car == null) {
+					Gui.showProductDoesNotExist();
+				} else {
+					return car;
+				}
 			} catch (NumberFormatException nfe) {
 				Gui.showInvalidInputErrorMessage();
 			}
