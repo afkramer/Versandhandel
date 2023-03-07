@@ -1,6 +1,6 @@
 package Versandhandel;
 
-//TODO: double check the logic of how to calculate the net price
+//TODO: double check the logic of how to calculate the net price and how the rebate should work
 
 public class Invoice {
 	private Customer customer;
@@ -14,24 +14,20 @@ public class Invoice {
 	
 	
 	public Invoice(Customer customer, Car car, int quantity) {
-		this.customer = customer;;
+		this.customer = customer;
 		this.quantity = quantity;
 		this.totalPrice = CarManagement.totalPrice(quantity, car);
-		applyDiscount();
 		this.includedTax = CarManagement.mehrwertsteuer(this.totalPrice, CarManagement.TAX);
 		this.netPrice = totalPrice - includedTax;
-		updateCustomerData();
-		
+		customer.updatePremiumStatus(this.netPrice);
+		applyDiscount();
+		customer.addToTotalSales(discountedNetPrice);
 	}
 	
 	public void applyDiscount() {
 		this.discountedNetPrice = this.netPrice * (1 - customer.getDiscount());
 		this.discountedIncludedTax = discountedNetPrice * (1 + CarManagement.TAX);
 		this.discountedTotalPrice = discountedNetPrice + discountedIncludedTax;
-	}
-	
-	public void updateCustomerData() {
-		customer.addToTotalSales(totalPrice);
 	}
 	
 	public int getQuantity() {

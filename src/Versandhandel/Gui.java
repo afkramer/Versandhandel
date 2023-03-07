@@ -133,11 +133,17 @@ public final class Gui {
 	}
 
 	public static void showInvoice(Customer customer, Car car, Invoice invoice) {
+		boolean customerIsPremium = customer.getUserType().equals(UserType.PREMIUM_CUSTOMER);
 		StringBuilder sb = new StringBuilder();
 		sb.append(String.format("%n%n%s %s%n", customer.getFirstName(), customer.getSurname()));
 		sb.append(String.format("%s %s%n", customer.getStreet(), customer.getHouseNumber()));
 		sb.append(String.format("%s %s %n%n%n", customer.getZipCode(), customer.getCity()));
-		sb.append(String.format("Danke %s für Ihren Einkauf!%n", customer.getFirstName()));
+		sb.append(String.format("Danke %s für Ihren Einkauf!%n%n", customer.getFirstName()));
+		
+		if (customerIsPremium) {
+			sb.append(String.format("Sie sind ein Premium Kunde! Vielen Dank für Ihre Treue.%n%n", customer.getUserType().germanText));
+		}
+		
 		sb.append("Hiermit stellen wir Ihnen die folgenden Produkte in Rechnung:\n");
 		sb.append(String.format((new String(new char[100])).replace("\0", "_")));
 		sb.append("\n");
@@ -165,14 +171,14 @@ public final class Gui {
 		sb.append(String.format("%,12.2f€", invoice.getIncludedTax()));
 		
 		
-		if (customer.getUserType().equals(UserType.PREMIUM_CUSTOMER)) {
+		if (customerIsPremium) {
 			sb.append(String.format("%26s", ""));
 			sb.append(String.format("%20s", "Zwischensumme Netto:"));
-			sb.append(String.format("%,12.2f€", invoice.getNetPrice()));
+			sb.append(String.format("%,12.2f€", invoice.getDiscountedNetPrice()));
 			sb.append("\n");
 			sb.append(String.format("%26s", ""));
 			sb.append(String.format("%20s", "Mehrwertsteuer:"));
-			sb.append(String.format("%,12.2f€", invoice.getIncludedTax()));
+			sb.append(String.format("%,12.2f€", invoice.getDiscountedIncludedTax()));
 			
 		}
 		
@@ -182,7 +188,13 @@ public final class Gui {
 		sb.append("\n");
 		sb.append(String.format("%26s", ""));
 		sb.append(String.format("%20s", "Gesamtbetrag:"));
-		sb.append(String.format("%,12.2f€", invoice.getTotalPrice()));
+		
+		if (customerIsPremium) {
+			sb.append(String.format("%,12.2f€", invoice.getDiscountedTotalPrice()));
+		} else {
+			sb.append(String.format("%,12.2f€", invoice.getTotalPrice()));
+		}
+		
 		sb.append("\n\n\n");
 		System.out.print(sb);
 	}
