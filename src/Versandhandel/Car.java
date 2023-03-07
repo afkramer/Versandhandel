@@ -75,7 +75,7 @@ public class Car {
     }
 
     public String toCSVFormat(){
-        return productNumber + ";" + productName + ";" + productPrice + ";" + productDescription + ";" + category + ";";
+        return productNumber + ";" + productName + ";" + productPrice + ";" + productDescription + ";" + this.category.category + ";";
     }
 
 } 

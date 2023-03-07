@@ -13,38 +13,7 @@ public final class Utility {
 	
 	private Utility() { }
 	
-	// Create methode, die Produkte in der Product Array anlegt
-	public static Car[] createCars () {
-		Car golf = new Car(12345, "Golf 7", 18999.99, "Golf 7 in Schwarz", VehicleClass.SMALL);
-		Car id3 = new Car(12346, "ID-3", 26987.98, "ID-3 in Pink", VehicleClass.MIDDLESIZE);
-		Car touran = new Car(12348, "Touran", 23567.87, "Touran in Grün", VehicleClass.MIDDLESIZE);
-		
-		return new Car[] {golf, id3, touran};
-	}
 
-
-	/**
-	* Die Methode berechnet die Mehrwertsteuer. 
-	*
-	* @param gesamterPreis     Der berechnete Preis aus Menge * Preis
-	* @param mwstSatz          Mehrwertsteuer in Prozent, z.B. 0.19 
-	* @return                  Die Mehrwertsteuer wird auf zwei Nachkommastellen gerundet ausgeggeben
-	*/
-	public static double mehrwertsteuer (double totalPrice, double mwstSatz){
-		return Math.round(totalPrice * mwstSatz * 100) / 100.0;
-	}
-
-
-	/**
-	* Die Methode berechnet den gesamten Preis. 
-	*
-	* @param menge             Die vom Kunden gewünschte Menge
-	* @param produktpreis      Der festgelegte Preis pro Stück
-	* @return                  Der gesamte Preis wird ausgegeben
-	*/
-	public static double totalPrice (int menge, Car car){
-		return Math.round(menge * car.getProductPrice() * 100) / 100.0; 
-	}
 	
 	
 	public static void writeCustomersToFile(Customer customerArray[]) {
@@ -62,27 +31,21 @@ public final class Utility {
 
 	public static Customer[] readCustomersFromFile() {
 		Customer[] customers = null;
-
 		try (BufferedReader reader = Files.newBufferedReader(Paths.get(CUSTOMER_CSV_PATH))) {
-
 			int amountLines = (int) Files.lines(Paths.get(CUSTOMER_CSV_PATH)).count();
 			customers = new Customer[amountLines];
-			for (int i = 0; i <= amountLines - 1; i++) {
+			for (int i = 0; i < amountLines; i++) {
 				String line = reader.readLine();
 				String[] value = line.split(";");
 				System.out.println(value);
 				customers[i] = new Customer(Integer.parseInt(value[0]), value[1], value[2], value[3], value[4],
 						value[5], value[6]);
-
 			}
-
 		} catch (IOException e) {
-			System.out.println("CSV-Datei konnte nicht geladen werden. Backupdaten werden verwendet!");
 			customers = CustomerManagement.createCustomers();
-
+			Gui.showReadErrorMessage();
 		}
 		return customers;
-
 	}
 	
 	public static void writeCarsToFile (Car[] carArray) {
@@ -90,12 +53,30 @@ public final class Utility {
 			for (Car car : carArray) {
 				writer.write(car.toCSVFormat()); 
 				writer.newLine();
-				
 			}
 		} catch (IOException e){
-			
+			Gui.showWriteErrorMessage(); 
 		}
 	}
+	
+	public static Car[] readCarsFromFile () {
+		Car[] cars = null;
+		try (BufferedReader reader = Files.newBufferedReader(Paths.get(CAR_CSV_PATH))) {
+			int amountLines = (int) Files.lines(Paths.get(CAR_CSV_PATH)).count();
+			cars = new Car[amountLines];
+			for (int i = 0; i < amountLines; i++){
+				String line = reader.readLine();
+				String [] fields = line.split(";");
+				//System.out.println(fields)
+				cars[i] = new Car( Integer.parseInt(fields[0]), fields[1], Double.parseDouble(fields[2]), fields[3], VehicleClass.valueOf(fields[4]));  
+			}
+			
+		} catch (IOException e){
+			Gui.showReadErrorMessage();
+			CarManagement.createCars(); 
+		}	
+		return cars; 	
+	}
 }
-
+	
 

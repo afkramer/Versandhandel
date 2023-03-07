@@ -159,31 +159,38 @@ public final class Gui {
 		sb.append(String.format("%-20s", car.getProductName()));
 		sb.append(String.format("%-9d", quantity));
 		sb.append(String.format("%-,9.2f€", car.getProductPrice()));
-		sb.append(String.format("%,12.2f€%n%n", Utility.totalPrice(quantity, car)));
+		sb.append(String.format("%,12.2f€%n%n", CarManagement.totalPrice(quantity, car)));
 		sb.append(String.format("%s", car.getProductDescription()));
 		sb.append("\n");
 		sb.append(String.format((new String(new char[100])).replace("\0", "_")));
 		sb.append("\n");
 		sb.append(String.format("%26s", ""));
 		sb.append(String.format("%20s", "Zwischensumme Netto:"));
-		sb.append(String.format("%,12.2f€", Utility.totalPrice(quantity, car)
-				- Utility.mehrwertsteuer(Utility.totalPrice(quantity, car), CarManagement.TAX)));
+		sb.append(String.format("%,12.2f€", CarManagement.totalPrice(quantity, car)
+				- CarManagement.mehrwertsteuer(CarManagement.totalPrice(quantity, car), CarManagement.TAX)));
 		sb.append("\n");
 		sb.append(String.format("%26s", ""));
 		sb.append(String.format("%20s", "Mehrwertsteuer:"));
-		sb.append(String.format("%,12.2f€", Utility.mehrwertsteuer(Utility.totalPrice(quantity, car), CarManagement.TAX)));
+		sb.append(String.format("%,12.2f€", CarManagement.mehrwertsteuer(CarManagement.totalPrice(quantity, car), CarManagement.TAX)));
 		sb.append("\n");
 		sb.append(String.format("%26s", ""));
 		sb.append(String.format((new String(new char[35])).replace("\0", "_")));
 		sb.append("\n");
 		sb.append(String.format("%26s", ""));
 		sb.append(String.format("%20s", "Gesamtbetrag:"));
-		sb.append(String.format("%,12.2f€", Utility.totalPrice(quantity, car)));
+		sb.append(String.format("%,12.2f€", CarManagement.totalPrice(quantity, car)));
 		sb.append("\n\n\n");
 		System.out.print(sb);
 	}
 
 	public static void showDeleteErrorMessage() {
 		System.out.println("Der Kunde konnte nicht gelöscht werden. Bitte kontrollieren Sie Ihre Daten noch einmal."); 
+	}
+	
+	public static void showReadErrorMessage() {
+		System.out.println("Die Daten konnten nicht gelesen werden. Es werden die Backup Daten verwendet.");
+	}
+	public static void showWriteErrorMessage() {
+		System.out.println("Die Daten konnten nicht gespeichert werden. Bitte kontrollieren Sie Ihre Daten.");
 	}
 }

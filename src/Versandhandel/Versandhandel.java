@@ -7,7 +7,7 @@ public class Versandhandel {
 	private Customer customer;
 
 	public void run () {
-		carArray = Utility.createCars();
+		carArray = Utility.readCarsFromFile();
 		customerArray = Utility.readCustomersFromFile();	
 		Gui.showWelcomeScreen();
 
