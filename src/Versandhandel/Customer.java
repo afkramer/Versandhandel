@@ -4,16 +4,15 @@ public class Customer extends User {
 	
 	private double totalSales;
 	private double discount; 
-
-
-	public Customer(int userId, String firstName, String surname, String street, String houseNumber, String zipCode, String city){ 
-		super(userId, firstName, surname, street, houseNumber, zipCode, city);
-		this.totalSales = 0.0;
-		this.discount = 0.0;
+	
+	public Customer(int userId, UserType userType, String firstName, String surname, String street, String houseNumber, String zipCode, String city, double totalSales, double discount){ 
+		super(userId, userType, firstName, surname, street, houseNumber, zipCode, city);
+		this.totalSales = totalSales;
+		this.discount = discount;
 	}
 	
 	public Customer(String firstName, String surname, String street, String houseNumber, String zipCode, String city){ 
-		this(0, firstName, surname, street, houseNumber, zipCode, city);
+		this(0, UserType.CUSTOMER, firstName, surname, street, houseNumber, zipCode, city, 0.0, 0.0);
 	}
 	
 	public double getTotalSales() {

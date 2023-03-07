@@ -30,11 +30,11 @@ public class User {
 	}
 	
 	public User(int customerNumber, String firstName, String surname, String street, String houseNumber, String zipCode, String city){ 
-		this(0, UserType.CUSTOMER, firstName, surname, street, houseNumber, zipCode, city);
+		this(customerNumber, UserType.CUSTOMER, firstName, surname, street, houseNumber, zipCode, city);
 	}
 	
-	public User(String firstName, String surname, String street, String houseNumber, String zipCode, String city){ 
-		this(0, firstName, surname, street, houseNumber, zipCode, city);
+	public User(UserType userType, String firstName, String surname, String street, String houseNumber, String zipCode, String city){ 
+		this(0, userType, firstName, surname, street, houseNumber, zipCode, city);
 	}
 	
 	public int getUserId() {

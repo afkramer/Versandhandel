@@ -1,5 +1,7 @@
 package Versandhandel;
 
+//TODO: do I want to rename all references to Customer to User instead? 
+
 public class Versandhandel {
 	private static Car[] carArray; 
 

@@ -4,13 +4,13 @@ public class Administrator extends User {
 	
 	private String password;
 	
-	public Administrator(int userId, String firstName, String surname, String street, String houseNumber, String zipCode, String city, String password) {
-		super(userId, firstName, surname, street, houseNumber, zipCode, city);
+	public Administrator(int userId, UserType userType, String firstName, String surname, String street, String houseNumber, String zipCode, String city, String password) {
+		super(userId, userType, firstName, surname, street, houseNumber, zipCode, city);
 		this.password = password;
 	}
 	
 	public Administrator(int userId, String firstName, String surname, String street, String houseNumber, String zipCode, String city) {
-		this(userId, firstName, surname, street, houseNumber, zipCode, city, null);
+		this(userId, UserType.ADMINISTRATOR, firstName, surname, street, houseNumber, zipCode, city, null);
 	}
 	
 	public String getPassword() {

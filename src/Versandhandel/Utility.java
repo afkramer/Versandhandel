@@ -1,6 +1,6 @@
 package Versandhandel;
 
-//TODO: update how the cars and customers are saved and loaded from the CSV file... At the moment we have a lot of NULL values
+//TODO: rename Customer[] and Customer to user? We should have User arrays
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -34,17 +34,46 @@ public final class Utility {
 			customers = new Customer[amountLines];
 			for (int i = 0; i < amountLines; i++) {
 				String line = reader.readLine();
-				String[] value = line.split(";");
-				// TODO: differentiate here what kind of user it is ->
-				// if it is an admin, there will be no sales or discount values
-				customers[i] = new Customer(Integer.parseInt(value[0]), value[1], value[2], value[3], value[4],
-						value[5], value[6]);
+				String[] fields = line.split(";");
+				if (fields[1].equals(UserType.ADMINISTRATOR)) {
+					customers[i] = parseAdministratorFromFields(fields);
+				} else {
+					customers[i] = parseCustomerFromFields(fields);
+				}
 			}
 		} catch (IOException e) {
 			customers = CustomerManagement.createCustomers();
 			Gui.showReadErrorMessage();
 		}
 		return customers;
+	}
+	
+	//TODO: a lot of redundancy here! How can I combine this?
+	public static Customer parseCustomerFromFields(String[] fields) {
+		int userId = Integer.parseInt(fields[0]);
+		UserType userType = UserType.parseUserTypeFromGermanText(fields[1]);
+		String firstName = fields[2];
+		String surname = fields[3];
+		String street = fields[4];
+		String houseNumber = fields[5];
+		String zipCode = fields[6];
+		String city = fields[7];
+		double totalSales = Double.parseDouble(fields[8]);
+		double discount =  Double.parseDouble(fields[9]);
+		return new Customer(userId, userType, firstName, surname, street, houseNumber, zipCode, city, totalSales, discount);
+	}
+	
+	public static Administrator parseAdministratorFromFields(String[] fields) {
+		int userId = Integer.parseInt(fields[0]);
+		UserType userType = UserType.parseUserTypeFromGermanText(fields[1]);
+		String firstName = fields[2];
+		String surname = fields[3];
+		String street = fields[4];
+		String houseNumber = fields[5];
+		String zipCode = fields[6];
+		String city = fields[7];
+		String password = fields[8];
+		return new Administrator(userId, userType, firstName, surname, street, houseNumber, zipCode, city, password);
 	}
 	
 	public static void writeCarsToFile (Car[] carArray) {
