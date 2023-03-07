@@ -1,9 +1,13 @@
 package Versandhandel;
 
 public enum UserType {
-	CUSTOMER,
-	PREMIUM_CUSTOMER,
-	ADMINISTRATOR;
+	CUSTOMER("Kunde"),
+	PREMIUM_CUSTOMER("Premium Kunde"),
+	ADMINISTRATOR("Administrator");
 	
-	private UserType() {}
+	String germanText;
+	
+	private UserType(String germanText) {
+		this.germanText = germanText;
+	}
 }

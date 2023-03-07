@@ -22,20 +22,20 @@ public class CustomerManagement {
 		customer.setHouseNumber(InputUtility.getHouseNumberForRegistration());
 		customer.setZipCode(InputUtility.getZipCodeForRegistration());
 		customer.setCity(InputUtility.getPlaceForRegistration());
-		CustomerManagement.createCustomerNumber(customer, customerArray);
+		CustomerManagement.createUserId(customer, customerArray);
 		return customer;
 	}
 	
 	public static Customer[] assignCustomerNumber ( Customer... customers ) { //x-beliebige Parameter der Klasse Customer 
 		Customer[] customerArray = new Customer[customers.length];
 		for( int i = 0; i < customers.length; i++) {
-			createCustomerNumber(customers[i], customerArray);
+			createUserId(customers[i], customerArray);
 			customerArray[i] = customers[i]; 
 		}   
         return customerArray;
 	}
 
-	public static void createCustomerNumber (Customer customer, Customer[] customerArray){
+	public static void createUserId (Customer customer, Customer[] customerArray){
 		int minNumber = (int) Math.pow(10, CUSTOMER_NUMBER_LENGTH - 1);
 		int maxNumber = (int) Math.pow(10, CUSTOMER_NUMBER_LENGTH) - 1;
 
@@ -43,7 +43,7 @@ public class CustomerManagement {
 			int zufallsZahl = (int) (Math.random() * maxNumber); 
 			boolean istInArray = isCustomerNumberValid(zufallsZahl, customerArray);
 			if (!istInArray && zufallsZahl >= minNumber && zufallsZahl <= maxNumber){
-				customer.setCustomerNumber(zufallsZahl);
+				customer.setUserId(zufallsZahl);
 				break;
 			}
 		}
@@ -70,7 +70,7 @@ public class CustomerManagement {
 	*/
 	public static boolean isCustomerNumberValid (int kundennummer, Customer[] customerArray) {
 		for(int i = 0; i <customerArray.length; i++) {
-			if (customerArray[i] != null && kundennummer == customerArray[i].getCustomerNumber()) {
+			if (customerArray[i] != null && kundennummer == customerArray[i].getUserId()) {
 				return true;
 			}
 		}
@@ -83,7 +83,7 @@ public class CustomerManagement {
 	public static Customer returnCustomer (int kundennummer, Customer[] customerArray) {
 
 		for(int i = 0; i < customerArray.length; i++) {
-			if (kundennummer == customerArray[i].getCustomerNumber()) {
+			if (kundennummer == customerArray[i].getUserId()) {
 				return customerArray[i];
 			}
 
@@ -124,7 +124,7 @@ public class CustomerManagement {
 			Customer[] newCustomerArray = new Customer[customerArray.length - 1]; 
 			int newIndex = 0; 
 			for (int i = 0; i < customerArray.length; i++) { 
-				if (customerNumber != customerArray[i].getCustomerNumber()) {
+				if (customerNumber != customerArray[i].getUserId()) {
 					newCustomerArray[newIndex] = customerArray[i]; 
 					newIndex++; 
 				}

@@ -61,7 +61,7 @@ public final class Gui {
 	
 	public static void showRegistrationResults(Customer customer) {
 		System.out.println("Vielen Dank für Ihre Registrierung " + customer.getFirstName());
-		System.out.println("Deine neue Kundennummer lautet " + customer.getCustomerNumber());
+		System.out.println("Deine neue Kundennummer lautet " + customer.getUserId());
 	}
 
 	public static Customer[] showMenu(Customer customer, Customer[] customers, Car[] carArray) {

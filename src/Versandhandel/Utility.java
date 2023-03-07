@@ -33,6 +33,8 @@ public final class Utility {
 			for (int i = 0; i < amountLines; i++) {
 				String line = reader.readLine();
 				String[] value = line.split(";");
+				// TODO: differentiate here what kind of user it is ->
+				// if it is an admin, there will be no sales or discount values
 				customers[i] = new Customer(Integer.parseInt(value[0]), value[1], value[2], value[3], value[4],
 						value[5], value[6]);
 			}

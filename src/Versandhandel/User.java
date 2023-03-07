@@ -17,19 +17,6 @@ public class User {
 	
 	private String city; 
 
-	public User(){
-
-	}
-
-	public User(String firstName, String surname, String street, String houseNumber, String zipCode, String city){ 
-		this.firstName = firstName; 
-		this.surname = surname; 
-		this.street = street; 
-		this.houseNumber = houseNumber; 
-		this.zipCode = zipCode; 
-		this.city = city;
-		
-	}
 
 	public User(int customerNumber, String firstName, String surname, String street, String houseNumber, String zipCode, String city){ 
 		this.userId = customerNumber; 
@@ -42,6 +29,12 @@ public class User {
 		
 	}
 	
+	public User(String firstName, String surname, String street, String houseNumber, String zipCode, String city){ 
+		this(0, firstName, surname, street, houseNumber, zipCode, city);
+	}
+
+	public User(){}
+	
 	public int getUserId() {
 		return this.userId; 
 	}
@@ -53,6 +46,10 @@ public class User {
 	
 	public UserType getUserType() {
 		return this.userType;
+	}
+	
+	public void setUserType(UserType userType) {
+		this.userType = userType;
 	}
 	
 	public String getFirstName() {
@@ -108,6 +105,8 @@ public class User {
 		StringBuilder sb = new StringBuilder(); 
 		sb.append("Name: \n");
 		sb.append(this.firstName + " " + this.surname + "\n\n");
+		sb.append("User Typ: \n");
+		sb.append(this.userType.germanText);
 		sb.append("Adresse: \n");
 		sb.append(this.street + " " + this.houseNumber + "\n");
 		sb.append(this.zipCode + " " + this.city + "\n\n"); 
@@ -115,6 +114,6 @@ public class User {
 	}
 	
 	public String toCSVFormat () {
-		return userId + ";" + firstName + ";" + surname + ";" + street + ";" + houseNumber + ";" + zipCode + ";" + city + ";";
+		return userId + ";" + userType + ";" + firstName + ";" + surname + ";" + street + ";" + houseNumber + ";" + zipCode + ";" + city + ";";
 	}
 }
