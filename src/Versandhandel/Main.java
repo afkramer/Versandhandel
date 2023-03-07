@@ -6,6 +6,7 @@ public class Main {
 		
 		Versandhandel versandhandel = new Versandhandel();
 		versandhandel.run();
+		
 	}
 	
 }

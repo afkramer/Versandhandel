@@ -10,4 +10,17 @@ package Versandhandel;
         private VehicleClass(String category) {
             this.category = category; 
         }
+
+        public static VehicleClass parseVehicleClassFromGermanText(String germanText){
+            switch (germanText){
+                case "Kleinwagen":
+                    return SMALL;
+                case "Mittelklasse":
+                    return MIDDLESIZE;
+                case "Ohne Kategorie":
+                    return NON_CATEGORY;
+                default:
+                    return NON_CATEGORY;
+            }
+        }
     }

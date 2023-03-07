@@ -6,16 +6,13 @@ public class InputUtility {
 
 	private static Scanner sc = new Scanner(System.in);
 
-	private InputUtility() {
-
-	}
+	private InputUtility() {}
 
 	public static void waitingForPressingEnter() {
 		System.out.println("Bitte drücken Sie die <Enter>-Taste");
 		sc.nextLine();
 	}
 
-	// TODO: output in ENUM umwandeln
 	public static String getUserChoice() {
 		int logIn;
 		String output;
@@ -125,7 +122,6 @@ public class InputUtility {
 		}
 
 	}
-
 
 
 	public static void changeData(Customer customer, int choice) {

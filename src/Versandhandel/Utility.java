@@ -1,6 +1,5 @@
 package Versandhandel;
 
-// FIXME: Alle Daten nochmal anzeigen lassen, nachdem man sie geändert hat 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -9,12 +8,9 @@ import java.nio.file.Paths;
 
 public final class Utility {
 	private static final String CUSTOMER_CSV_PATH = "Customer.csv";
-	private static final String CAR_CSV_PATH = "Car.csv";
+	private static final String CAR_CSV_PATH = "Cars.csv";
 	
 	private Utility() { }
-	
-
-	
 	
 	public static void writeCustomersToFile(Customer customerArray[]) {
 		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(CUSTOMER_CSV_PATH))) {
@@ -66,14 +62,14 @@ public final class Utility {
 			cars = new Car[amountLines];
 			for (int i = 0; i < amountLines; i++){
 				String line = reader.readLine();
-				String [] fields = line.split(";");
+				String[] fields = line.split(";");
 				//System.out.println(fields)
-				cars[i] = new Car( Integer.parseInt(fields[0]), fields[1], Double.parseDouble(fields[2]), fields[3], VehicleClass.valueOf(fields[4]));  
+				cars[i] = new Car( Integer.parseInt(fields[0]), fields[1], Double.parseDouble(fields[2]), fields[3], VehicleClass.parseVehicleClassFromGermanText(fields[4]));  
 			}
 			
 		} catch (IOException e){
 			Gui.showReadErrorMessage();
-			CarManagement.createCars(); 
+			cars = CarManagement.createCars(); 
 		}	
 		return cars; 	
 	}
