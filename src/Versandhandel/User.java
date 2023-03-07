@@ -1,22 +1,38 @@
 package Versandhandel;
 
-public class Customer extends User {
+public class User {
+	private int userId; 
 	
-	private double totalSales;
-	private double discount; 
+	private UserType userType;
+	
+	private String firstName; 
+	
+	private String surname; 
+	
+	private String street; 
+	
+	private String houseNumber; 
+	
+	private String zipCode; 
+	
+	private String city; 
 
-	public Customer(){
+	public User(){
 
 	}
 
-	public Customer(String firstName, String surname, String street, String houseNumber, String zipCode, String city){ 
-		super(firstName, surname, street, houseNumber, zipCode, city);
-		this.totalSales = 0.0;
-		this.discount = 0.0;
+	public User(String firstName, String surname, String street, String houseNumber, String zipCode, String city){ 
+		this.firstName = firstName; 
+		this.surname = surname; 
+		this.street = street; 
+		this.houseNumber = houseNumber; 
+		this.zipCode = zipCode; 
+		this.city = city;
+		
 	}
 
-	public Customer(int customerNumber, String firstName, String surname, String street, String houseNumber, String zipCode, String city){ 
-		this.customerNumber = customerNumber; 
+	public User(int customerNumber, String firstName, String surname, String street, String houseNumber, String zipCode, String city){ 
+		this.userId = customerNumber; 
 		this.firstName = firstName; 
 		this.surname = surname; 
 		this.street = street; 
@@ -26,13 +42,17 @@ public class Customer extends User {
 		
 	}
 	
-	public int getCustomerNumber() {
-		return customerNumber; 
+	public int getUserId() {
+		return this.userId; 
 	}
 	
-	public void setCustomerNumber(int customerNumber) {
-		this.customerNumber = customerNumber; 
+	public void setUserId(int userId) {
+		this.userId = userId; 
 		
+	}
+	
+	public UserType getUserType() {
+		return this.userType;
 	}
 	
 	public String getFirstName() {
@@ -95,7 +115,6 @@ public class Customer extends User {
 	}
 	
 	public String toCSVFormat () {
-		return customerNumber + ";" + firstName + ";" + surname + ";" + street + ";" + houseNumber + ";" + zipCode + ";" + city + ";";
+		return userId + ";" + firstName + ";" + surname + ";" + street + ";" + houseNumber + ";" + zipCode + ";" + city + ";";
 	}
-
 }
