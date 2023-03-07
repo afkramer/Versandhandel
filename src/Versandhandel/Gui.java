@@ -24,23 +24,6 @@ public final class Gui {
 		InputUtility.waitingForPressingEnter();
 	}
 
-	public static Customer register(Customer[] customerArray) {
-		Customer customer = new Customer();
-		System.out.println("Bitte geben Sie hier Ihre Kundendaten ein:");
-		InputUtility.getFirstNameForRegistration();
-		InputUtility.getSurnameForRegistration();
-		InputUtility.getStreetForRegistration();
-		InputUtility.getHouseNumberForRegistration();
-		InputUtility.getZipCodeForRegistration();
-		InputUtility.getPlaceForRegistration();
-		// TODO: Alle Eingaben über die Utility-Klasse abfragen und dann Customer
-		// erstellen, entweder über Konstruktor oder Costumer-Management
-
-		CustomerManagement.createCustomerNumber(customer, customerArray);
-		System.out.println("Ihre neue Kundennummer lautet: " + customer.getCustomerNumber() + "\n");
-		return customer;
-	}
-
 	/**
 	 * Die Methode fordert den Kunden auf seine Kundennummer einzugeben, diese wird
 	 * im Anschluss ausgegeben.
@@ -75,8 +58,13 @@ public final class Gui {
 		return customer;
 
 	}
+	
+	public static void showRegistrationResults(Customer customer) {
+		System.out.println("Vielen Dank für Ihre Registrierung " + customer.getFirstName());
+		System.out.println("Deine neue Kundennummer lautet " + customer.getCustomerNumber());
+	}
 
-	public static void showMenu(Customer customer, Car[] carArray) {
+	public static Customer[] showMenu(Customer customer, Customer[] customers, Car[] carArray) {
 		int menge;
 
 		while (true) {
@@ -88,14 +76,16 @@ public final class Gui {
 					break;
 
 				} else if (choice == 2) {
-					
-					int choiceData = InputUtility.getUserData();
-					InputUtility.changeData(customer, choiceData);
-					
+					CustomerManagement.changeData(customer);
+					Utility.writeCustomersToFile(customers);
+
 				} else if (choice == 3) {
 					showProduct(carArray);
 					menge = InputUtility.getAmountOfProducts();
 					showInvoice(customer, carArray[0], menge);
+					
+				} else if (choice == 4){
+					//TODO: delete customer, only if the user is an administrator
 				} else {
 					System.out.println("Falsche Eingabe. Bitte versuchen Sie es erneut.");
 				}
@@ -104,9 +94,9 @@ public final class Gui {
 				System.out.println("Bitte versuchen Sie es erneut.");
 			}
 		}
-	}
 
-	
+		return customers;
+	}
 
 	public static void showProduct(Car[] carArray) {
 		System.out.println("\n\n\nDiese Autos stehen zur Verfügung:");
@@ -192,5 +182,8 @@ public final class Gui {
 	}
 	public static void showWriteErrorMessage() {
 		System.out.println("Die Daten konnten nicht gespeichert werden. Bitte kontrollieren Sie Ihre Daten.");
+	}
+	public static void showInvalidInputErrorMessage () {
+		System.out.println("Ihre Eingabe ist fehlerhaft. Bitte versuchen Sie es erneut."); 
 	}
 }

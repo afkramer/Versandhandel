@@ -14,11 +14,12 @@ public class Versandhandel {
 		while (true){
 			String output = InputUtility.getUserChoice();
 			if (output == "register"){
-				customer = InputUtility.getCompleteRegistration(customer, customerArray);
+				customer = CustomerManagement.registerCustomer(customerArray);
+				Gui.showRegistrationResults(customer); 
 				customerArray = CustomerManagement.kundeSpeichern(customer, customerArray);
 			} else if (output == "login"){
 				customer = Gui.login(customerArray);
-				Gui.showMenu(customer, carArray);
+				customerArray = Gui.showMenu(customer, customerArray, carArray);
 			} else if (output == "quit"){ 
 				break;
 			} else {

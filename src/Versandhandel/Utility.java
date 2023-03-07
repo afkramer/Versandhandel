@@ -33,7 +33,6 @@ public final class Utility {
 			for (int i = 0; i < amountLines; i++) {
 				String line = reader.readLine();
 				String[] value = line.split(";");
-				System.out.println(value);
 				customers[i] = new Customer(Integer.parseInt(value[0]), value[1], value[2], value[3], value[4],
 						value[5], value[6]);
 			}
@@ -63,7 +62,6 @@ public final class Utility {
 			for (int i = 0; i < amountLines; i++){
 				String line = reader.readLine();
 				String[] fields = line.split(";");
-				//System.out.println(fields)
 				cars[i] = new Car( Integer.parseInt(fields[0]), fields[1], Double.parseDouble(fields[2]), fields[3], VehicleClass.parseVehicleClassFromGermanText(fields[4]));  
 			}
 			

@@ -83,17 +83,7 @@ public class InputUtility {
 		return Integer.parseInt(sc.nextLine());
 	}
 
-	public static Customer getCompleteRegistration(Customer customer, Customer[] customerArray) {
-		getFirstNameForRegistration();
-		getSurnameForRegistration();
-		getStreetForRegistration();
-		getHouseNumberForRegistration();
-		getZipCodeForRegistration();
-		getPlaceForRegistration();
-		CustomerManagement.createCustomerNumber(customer, customerArray);
-		return customer;
-	}
-
+	//TODO: Error handling -> what happens if user enters 4? "a"?
 	public static int getUserChoiceForMenu() {
 		System.out.println("Bitte wählen Sie eine der drei Möglichkeiten:");
 		System.out.println("Drücken Sie die Taste 1, um sich auszuloggen.");
@@ -123,51 +113,22 @@ public class InputUtility {
 
 	}
 
-
-	public static void changeData(Customer customer, int choice) {
-
-		while (true) {
-			
-			try {
-
-				if (choice == 1) {
-					getFirstNameForRegistration();
-				} else if (choice == 2) {
-					getSurnameForRegistration();
-				} else if (choice == 3) {
-					getStreetForRegistration();
-				} else if (choice == 4) {
-					getHouseNumberForRegistration();
-				} else if (choice == 5) {
-					getZipCodeForRegistration();
-				} else if (choice == 6) {
-					getPlaceForRegistration();
-				} else if (choice == 7) {
-					getUserData();
-				} else if (choice == 8) {
-					// Methode zum Löschen
-				} 
-			} catch (NumberFormatException nfe) {
-				System.out.println("Bitte geben Sie eine Zahl von 1-8 ein.");
-
-			} getUserData(); 
-			 break;
-		}
-	}
-
 	public static int getUserData() {
-		
-		System.out.println("Welche Daten möchten Sie ändern?");
-		System.out.println("1) Vorname");
-		System.out.println("2) Nachname");
-		System.out.println("3) Straße");
-		System.out.println("4) Hausnummer");
-		System.out.println("5) Postleitzahl");
-		System.out.println("6) Stadt");
-		System.out.println("7) Zurück zum Hauptmenü");
-		System.out.println("8) Kundenkonto löschen");
-		int choice = Integer.parseInt(sc.nextLine());
-		return choice;
+		while (true) {
+			System.out.println("Welche Daten möchten Sie ändern?");
+			System.out.println("1) Vorname");
+			System.out.println("2) Nachname");
+			System.out.println("3) Straße");
+			System.out.println("4) Hausnummer");
+			System.out.println("5) Postleitzahl");
+			System.out.println("6) Stadt");
+			System.out.println("7) Zurück zum Hauptmenü");
+			try {
+				return Integer.parseInt(sc.nextLine());
+			} catch (NumberFormatException nfe) {
+				Gui.showInvalidInputErrorMessage(); 
+			}
+		}
 	}
 
 }

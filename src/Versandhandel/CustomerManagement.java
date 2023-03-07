@@ -12,6 +12,19 @@ public class CustomerManagement {
 		Customer lara = new Customer ("Lara", "Schneider", "Skodaweg", "3", "38446", "Wolfsburg");
 		return assignCustomerNumber(max, mareike, lara);
 	}
+
+	//TODO: show the new customer number!
+	public static Customer registerCustomer(Customer[] customerArray) {
+		Customer customer = new Customer(); 
+		customer.setFirstName(InputUtility.getFirstNameForRegistration());
+		customer.setSurname(InputUtility.getSurnameForRegistration());
+		customer.setStreet(InputUtility.getStreetForRegistration());
+		customer.setHouseNumber(InputUtility.getHouseNumberForRegistration());
+		customer.setZipCode(InputUtility.getZipCodeForRegistration());
+		customer.setCity(InputUtility.getPlaceForRegistration());
+		CustomerManagement.createCustomerNumber(customer, customerArray);
+		return customer;
+	}
 	
 	public static Customer[] assignCustomerNumber ( Customer... customers ) { //x-beliebige Parameter der Klasse Customer 
 		Customer[] customerArray = new Customer[customers.length];
@@ -77,30 +90,30 @@ public class CustomerManagement {
 		}
 		return null;
 	}
-	
-	public static void updateCustomer (Customer customer, String newData, int choice) { //TODO: newDatat kann dann rausgenommen werden
-		switch (choice) {
-			case 1:
-				customer.setFirstName(newData); //TODO; Wenn fertig, InputUtility.getFirstName();
+
+	public static void changeData(Customer customer) {
+		int choice;
+		while (true) {
+			choice = InputUtility.getUserData();
+
+			if (choice == 1) {
+				customer.setFirstName(InputUtility.getFirstNameForRegistration());
+			} else if (choice == 2) {
+				customer.setSurname(InputUtility.getSurnameForRegistration());
+			} else if (choice == 3) {
+				customer.setStreet(InputUtility.getStreetForRegistration());
+			} else if (choice == 4) {
+				customer.setHouseNumber(InputUtility.getHouseNumberForRegistration());
+			} else if (choice == 5) {
+				customer.setZipCode(InputUtility.getZipCodeForRegistration());
+			} else if (choice == 6) {
+				customer.setCity(InputUtility.getPlaceForRegistration());
+			} else if (choice == 7) {
 				break;
-			case 2: 
-				customer.setSurname(newData);
-				break; 
-			case 3: 
-				customer.setStreet(newData);
-				break; 
-			case 4: 
-				customer.setHouseNumber(newData);
-				break; 
-			case 5: 
-				customer.setZipCode(newData); 
-				break; 
-			case 6: 
-				customer.setCity(newData);
-				break; 
-			default: 
-				System.out.println("Falsche Eingabe."); 
-		}
+			} else {
+				System.out.println("Bitte geben Sie eine Zahl von 1-7 ein.");
+			}
+		} 
 	}
 
 
