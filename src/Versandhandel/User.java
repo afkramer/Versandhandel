@@ -18,14 +18,19 @@ public class User {
 	private String city; 
 
 
-	public User(int customerNumber, String firstName, String surname, String street, String houseNumber, String zipCode, String city){ 
+	public User(int customerNumber, UserType userType, String firstName, String surname, String street, String houseNumber, String zipCode, String city) {
 		this.userId = customerNumber; 
+		this.userType = userType;
 		this.firstName = firstName; 
 		this.surname = surname; 
 		this.street = street; 
 		this.houseNumber = houseNumber; 
 		this.zipCode = zipCode; 
 		this.city = city;
+	}
+	
+	public User(int customerNumber, String firstName, String surname, String street, String houseNumber, String zipCode, String city){ 
+		this(0, UserType.CUSTOMER, firstName, surname, street, houseNumber, zipCode, city);
 	}
 	
 	public User(String firstName, String surname, String street, String houseNumber, String zipCode, String city){ 
