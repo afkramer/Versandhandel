@@ -17,7 +17,7 @@ public class Versandhandel {
 			String output = InputUtility.getUserChoice();
 			if (output == "register"){
 				user = UserManagement.registerCustomer(users);
-				Gui.showRegistrationResults(user); 
+				Gui.showRegistrationResults((Customer) user); 
 				users = UserManagement.saveUser(user, users);
 			} else if (output == "login"){
 				user = Gui.login(users);

@@ -48,33 +48,38 @@ public class InputUtility {
 		return output;
 	}
 
-	public static String getFirstNameForRegistration() {
+	public static String getFirstNameInput() {
 		System.out.println("Vorname:");
 		return sc.nextLine();
 	}
 
-	public static String getSurnameForRegistration() {
+	public static String getSurnameInput() {
 		System.out.println("Nachname:");
 		return sc.nextLine();
 	}
 
-	public static String getStreetForRegistration() {
+	public static String getStreetInput() {
 		System.out.println("Straße:");
 		return sc.nextLine();
 	}
 
-	public static String getHouseNumberForRegistration() {
+	public static String getHouseNumberInput() {
 		System.out.println("Hausnummer:");
 		return sc.nextLine();
 	}
 
-	public static String getZipCodeForRegistration() {
+	public static String getZipCodeInput() {
 		System.out.println("Postleitzahl:");
 		return sc.nextLine();
 	}
 
-	public static String getPlaceForRegistration() {
+	public static String getCityInput() {
 		System.out.println("Stadt:");
+		return sc.nextLine();
+	}
+	
+	public static String getPasswordInput() {
+		System.out.println("Password:");
 		return sc.nextLine();
 	}
 
@@ -83,13 +88,24 @@ public class InputUtility {
 		return Integer.parseInt(sc.nextLine());
 	}
 
-	//TODO: Error handling -> what happens if user enters 4? "a"?
-	public static int getUserChoiceForMenu() {
-		System.out.println("Bitte wählen Sie eine der drei Möglichkeiten:");
-		System.out.println("Drücken Sie die Taste 1, um sich auszuloggen.");
-		System.out.println("Drücken Sie die Taste 2, um Ihre Angaben zu ändern.");
-		System.out.println("Drücken Sie die Taste 3, wenn Sie weiter einkaufen wollen.");
-		return Integer.parseInt(sc.nextLine());
+	public static int getUserChoiceForMenu(User user) {
+		while (true) {
+			System.out.println("Bitte wählen Sie eine der drei Möglichkeiten:\n");
+			System.out.println("Drücken Sie die Taste 1, um sich auszuloggen.");
+			System.out.println("Drücken Sie die Taste 2, um Ihre Angaben zu ändern.");
+			if (user.getUserType().equals(UserType.ADMINISTRATOR)) {
+				System.out.println("Drücken Sie die Taste 3, wenn Sie einen Kunden löschen möchten.");
+				System.out.println("Drücken Sie die Taste 4, wenn Sie Produktdaten anpassen möchten.");
+			} else {
+				System.out.println("Drücken Sie die Taste 3, wenn Sie ein Auto kaufen möchten.");
+			}
+			
+			try {
+				return Integer.parseInt(sc.nextLine());
+			} catch (NumberFormatException nfe) {
+				Gui.showInvalidInputErrorMessage();
+			}
+		}
 	}
 	
 	public static Car getDesiredProduct(Car[] cars) {

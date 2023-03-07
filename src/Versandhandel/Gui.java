@@ -73,7 +73,7 @@ public final class Gui {
 		while (true) {
 
 			try {
-				int choice = InputUtility.getUserChoiceForMenu();
+				int choice = InputUtility.getUserChoiceForMenu(user);
 				if (choice == 1) {
 					System.out.println("Sie haben sich erfolgreich ausgelogt");
 					break;
@@ -83,14 +83,19 @@ public final class Gui {
 					Utility.writeUsersToFile(users);
 
 				} else if (choice == 3) {
-					showProduct(cars);
-					Car car = InputUtility.getDesiredProduct(cars);
-					menge = InputUtility.getAmountOfProducts();
-					Invoice invoice = new Invoice(user, car, menge);
-					showInvoice(user, car, invoice);
+					if (user.getUserType().equals(UserType.ADMINISTRATOR)) {
+						showNoAccessErrorMessage();
+					} else {
+						showProduct(cars);
+						Car car = InputUtility.getDesiredProduct(cars);
+						menge = InputUtility.getAmountOfProducts();
+						Invoice invoice = new Invoice( (Customer) user, car, menge);
+						showInvoice((Customer) user, car, invoice);
+					}
 					
 				} else if (choice == 4){
 					//TODO: delete customer, only if the user is an administrator
+					
 				} else {
 					System.out.println("Falsche Eingabe. Bitte versuchen Sie es erneut.");
 				}
@@ -182,7 +187,7 @@ public final class Gui {
 			sb.append(String.format("%,12.2f€", invoice.getDiscountedNetPrice()));
 			sb.append("\n");
 			sb.append(String.format("%26s", ""));
-			sb.append(String.format("%20s", "Mehrwertsteuer mit Rabbatt:"));
+			sb.append(String.format("%20s", "MwSt. nach Rabatt:"));
 			sb.append(String.format("%,12.2f€", invoice.getDiscountedIncludedTax()));
 			sb.append("\n");
 		}
@@ -205,6 +210,10 @@ public final class Gui {
 	
 	public static void showProductDoesNotExist() {
 		System.out.println("Diese Produktnummer existiert nicht. Bitte versuchen Sie es erneut.");
+	}
+	
+	public static void showNoAccessErrorMessage() {
+		System.out.println("Sie haben nicht die erforderlichen Rechte, um diese Option zu verwenden.");
 	}
 
 	public static void showDeleteErrorMessage() {

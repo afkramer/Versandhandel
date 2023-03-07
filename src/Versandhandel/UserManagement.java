@@ -15,12 +15,12 @@ public class UserManagement {
 
 	//TODO: show the new customer number!
 	public static Customer registerCustomer(User[] users) {
-		String firstName = InputUtility.getFirstNameForRegistration();
-		String surname = InputUtility.getSurnameForRegistration();
-		String street = InputUtility.getStreetForRegistration();
-		String houseNumber = InputUtility.getHouseNumberForRegistration();
-		String zipCode = InputUtility.getZipCodeForRegistration();
-		String city = InputUtility.getPlaceForRegistration();
+		String firstName = InputUtility.getFirstNameInput();
+		String surname = InputUtility.getSurnameInput();
+		String street = InputUtility.getStreetInput();
+		String houseNumber = InputUtility.getHouseNumberInput();
+		String zipCode = InputUtility.getZipCodeInput();
+		String city = InputUtility.getCityInput();
 		Customer customer = new Customer(firstName, surname, street, houseNumber, zipCode, city);
 		UserManagement.createUserId(customer, users);
 		return customer;
@@ -90,24 +90,24 @@ public class UserManagement {
 		return null;
 	}
 
-	
+	//TODO: show what the results of the update are
 	public static void changeData(User user) {
 		int choice;
 		while (true) {
 			choice = InputUtility.getUserData();
 
 			if (choice == 1) {
-				user.setFirstName(InputUtility.getFirstNameForRegistration());
+				user.setFirstName(InputUtility.getFirstNameInput());
 			} else if (choice == 2) {
-				user.setSurname(InputUtility.getSurnameForRegistration());
+				user.setSurname(InputUtility.getSurnameInput());
 			} else if (choice == 3) {
-				user.setStreet(InputUtility.getStreetForRegistration());
+				user.setStreet(InputUtility.getStreetInput());
 			} else if (choice == 4) {
-				user.setHouseNumber(InputUtility.getHouseNumberForRegistration());
+				user.setHouseNumber(InputUtility.getHouseNumberInput());
 			} else if (choice == 5) {
-				user.setZipCode(InputUtility.getZipCodeForRegistration());
+				user.setZipCode(InputUtility.getZipCodeInput());
 			} else if (choice == 6) {
-				user.setCity(InputUtility.getPlaceForRegistration());
+				user.setCity(InputUtility.getCityInput());
 			} else if (choice == 7) {
 				break;
 			} else {
