@@ -44,7 +44,7 @@ public final class Utility {
 				}
 			}
 		} catch (IOException e) {
-			users = CustomerManagement.createCustomers();
+			users = UserManagement.createCustomers();
 			Gui.showReadErrorMessage();
 		}
 		return users;

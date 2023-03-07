@@ -41,8 +41,8 @@ public final class Gui {
 
 			try {
 				int kundennummer = InputUtility.getCustomerNumber();
-				if (CustomerManagement.isCustomerNumberValid(kundennummer, users)) {
-					user = CustomerManagement.returnCustomer(kundennummer, users);
+				if (UserManagement.isUserNumberValid(kundennummer, users)) {
+					user = UserManagement.returnUserByUserId(kundennummer, users);
 					System.out.println("Herzlich Willkommen " + user.getFirstName() + "");
 					break;
 
@@ -79,7 +79,7 @@ public final class Gui {
 					break;
 
 				} else if (choice == 2) {
-					CustomerManagement.changeData(user);
+					UserManagement.changeData(user);
 					Utility.writeUsersToFile(users);
 
 				} else if (choice == 3) {
