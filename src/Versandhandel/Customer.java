@@ -16,8 +16,6 @@ public class Customer extends User {
 		this(0, firstName, surname, street, houseNumber, zipCode, city);
 	}
 	
-	public Customer(){}
-	
 	public double getTotalSales() {
 		return this.totalSales;
 	}
@@ -36,6 +34,10 @@ public class Customer extends User {
 	
 	public void addToTotalSales(double sale) {
 		totalSales += sale;
+	}
+	
+	public double applyDiscount(double total) {
+		return total * (1 - this.discount);
 	}
 	
 	@Override

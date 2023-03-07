@@ -26,14 +26,11 @@ public class User {
 		this.houseNumber = houseNumber; 
 		this.zipCode = zipCode; 
 		this.city = city;
-		
 	}
 	
 	public User(String firstName, String surname, String street, String houseNumber, String zipCode, String city){ 
 		this(0, firstName, surname, street, houseNumber, zipCode, city);
 	}
-
-	public User(){}
 	
 	public int getUserId() {
 		return this.userId; 

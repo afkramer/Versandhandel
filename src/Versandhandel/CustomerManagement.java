@@ -15,13 +15,13 @@ public class CustomerManagement {
 
 	//TODO: show the new customer number!
 	public static Customer registerCustomer(Customer[] customerArray) {
-		Customer customer = new Customer(); 
-		customer.setFirstName(InputUtility.getFirstNameForRegistration());
-		customer.setSurname(InputUtility.getSurnameForRegistration());
-		customer.setStreet(InputUtility.getStreetForRegistration());
-		customer.setHouseNumber(InputUtility.getHouseNumberForRegistration());
-		customer.setZipCode(InputUtility.getZipCodeForRegistration());
-		customer.setCity(InputUtility.getPlaceForRegistration());
+		String firstName = InputUtility.getFirstNameForRegistration();
+		String surname = InputUtility.getSurnameForRegistration();
+		String street = InputUtility.getStreetForRegistration();
+		String houseNumber = InputUtility.getHouseNumberForRegistration();
+		String zipCode = InputUtility.getZipCodeForRegistration();
+		String city = InputUtility.getPlaceForRegistration();
+		Customer customer = new Customer(firstName, surname, street, houseNumber, zipCode, city);
 		CustomerManagement.createUserId(customer, customerArray);
 		return customer;
 	}
