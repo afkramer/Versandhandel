@@ -16,8 +16,8 @@ public class Invoice {
 	public Invoice(Customer customer, Car car, int quantity) {
 		this.customer = customer;
 		this.quantity = quantity;
-		this.totalPrice = CarManagement.totalPrice(quantity, car);
-		this.includedTax = CarManagement.mehrwertsteuer(this.totalPrice, CarManagement.TAX);
+		this.totalPrice = CarManagement.calculateTotalPrice(quantity, car);
+		this.includedTax = CarManagement.calculateIncludedTax(this.totalPrice, CarManagement.TAX);
 		this.netPrice = totalPrice - includedTax;
 		customer.updatePremiumStatus(this.netPrice);
 		applyDiscount();
@@ -26,7 +26,7 @@ public class Invoice {
 	
 	public void applyDiscount() {
 		this.discountedNetPrice = this.netPrice * (1 - customer.getDiscount());
-		this.discountedIncludedTax = discountedNetPrice * (1 + CarManagement.TAX);
+		this.discountedIncludedTax = discountedNetPrice * CarManagement.TAX;
 		this.discountedTotalPrice = discountedNetPrice + discountedIncludedTax;
 	}
 	

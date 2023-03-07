@@ -1,5 +1,8 @@
 package Versandhandel;
 
+//TODO: make the output look nicer!
+//TODO: wollen wir wirklich immer, dass der Kunde Enter drucken muss?
+
 public final class Gui {
 
 	private static final String BLUE_TEXT = "\u001B[34m";
@@ -137,7 +140,7 @@ public final class Gui {
 		StringBuilder sb = new StringBuilder();
 		sb.append(String.format("%n%n%s %s%n", customer.getFirstName(), customer.getSurname()));
 		sb.append(String.format("%s %s%n", customer.getStreet(), customer.getHouseNumber()));
-		sb.append(String.format("%s %s %n%n%n", customer.getZipCode(), customer.getCity()));
+		sb.append(String.format("%s %s %n%n", customer.getZipCode(), customer.getCity()));
 		sb.append(String.format("Danke %s für Ihren Einkauf!%n%n", customer.getFirstName()));
 		
 		if (customerIsPremium) {
@@ -158,7 +161,7 @@ public final class Gui {
 		sb.append(String.format("%-9d", invoice.getQuantity()));
 		sb.append(String.format("%-,9.2f€", car.getProductPrice()));
 		sb.append(String.format("%,12.2f€%n%n", invoice.getTotalPrice()));
-		sb.append(String.format("%s", car.getProductDescription()));
+		sb.append(String.format("%s%n", car.getProductDescription()));
 		sb.append("\n");
 		sb.append(String.format((new String(new char[100])).replace("\0", "_")));
 		sb.append("\n");
@@ -169,20 +172,21 @@ public final class Gui {
 		sb.append(String.format("%26s", ""));
 		sb.append(String.format("%20s", "Mehrwertsteuer:"));
 		sb.append(String.format("%,12.2f€", invoice.getIncludedTax()));
+		sb.append("\n");
 		
 		
 		if (customerIsPremium) {
+			sb.append("\n");
 			sb.append(String.format("%26s", ""));
-			sb.append(String.format("%20s", "Zwischensumme Netto:"));
+			sb.append(String.format("%20s", "Netto mit Rabbatt:"));
 			sb.append(String.format("%,12.2f€", invoice.getDiscountedNetPrice()));
 			sb.append("\n");
 			sb.append(String.format("%26s", ""));
-			sb.append(String.format("%20s", "Mehrwertsteuer:"));
+			sb.append(String.format("%20s", "Mehrwertsteuer mit Rabbatt:"));
 			sb.append(String.format("%,12.2f€", invoice.getDiscountedIncludedTax()));
-			
+			sb.append("\n");
 		}
 		
-		sb.append("\n");
 		sb.append(String.format("%26s", ""));
 		sb.append(String.format((new String(new char[35])).replace("\0", "_")));
 		sb.append("\n");

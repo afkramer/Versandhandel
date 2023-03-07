@@ -1,5 +1,7 @@
 package Versandhandel;
 
+//TODO: update how the cars and customers are saved and loaded from the CSV file... At the moment we have a lot of NULL values
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;

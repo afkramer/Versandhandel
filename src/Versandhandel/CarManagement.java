@@ -29,7 +29,7 @@ public final class CarManagement {
 	 * @return Die Mehrwertsteuer wird auf zwei Nachkommastellen gerundet
 	 *         ausgeggeben
 	 */
-	public static double mehrwertsteuer(double totalPrice, double mwstSatz) {
+	public static double calculateIncludedTax(double totalPrice, double mwstSatz) {
 		return Math.round(totalPrice * mwstSatz * 100) / 100.0;
 	}
 
@@ -40,7 +40,7 @@ public final class CarManagement {
 	 * @param produktpreis Der festgelegte Preis pro Stück
 	 * @return Der gesamte Preis wird ausgegeben
 	 */
-	public static double totalPrice(int menge, Car car) {
+	public static double calculateTotalPrice(int menge, Car car) {
 		return Math.round(menge * car.getProductPrice() * 100) / 100.0;
 	}
 }
