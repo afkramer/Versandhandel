@@ -14,11 +14,13 @@ public final class Utility {
 	
 	private Utility() { }
 	
-	public static void writeCustomersToFile(Customer customerArray[]) {
+	//TODO: is this going to work correctly?
+	//  Will the correct toCSVFormat method be used based on whether it is a customer or an admin?
+	public static void writeUsersToFile(User[] users) {
 		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(CUSTOMER_CSV_PATH))) {
 
-			for (Customer customer : customerArray) {
-				writer.write(customer.toCSVFormat());
+			for (User user : users) {
+				writer.write(user.toCSVFormat());
 				writer.newLine();
 			}
 
@@ -27,25 +29,25 @@ public final class Utility {
 		}
 	}
 
-	public static Customer[] readCustomersFromFile() {
-		Customer[] customers = null;
+	public static User[] readUsersFromFile() {
+		User[] users = null;
 		try (BufferedReader reader = Files.newBufferedReader(Paths.get(CUSTOMER_CSV_PATH))) {
 			int amountLines = (int) Files.lines(Paths.get(CUSTOMER_CSV_PATH)).count();
-			customers = new Customer[amountLines];
+			users = new User[amountLines];
 			for (int i = 0; i < amountLines; i++) {
 				String line = reader.readLine();
 				String[] fields = line.split(";");
-				if (fields[1].equals(UserType.ADMINISTRATOR)) {
-					customers[i] = parseAdministratorFromFields(fields);
+				if (fields[1].equals(UserType.ADMINISTRATOR.germanText)) {
+					users[i] = parseAdministratorFromFields(fields);
 				} else {
-					customers[i] = parseCustomerFromFields(fields);
+					users[i] = parseCustomerFromFields(fields);
 				}
 			}
 		} catch (IOException e) {
-			customers = CustomerManagement.createCustomers();
+			users = CustomerManagement.createCustomers();
 			Gui.showReadErrorMessage();
 		}
-		return customers;
+		return users;
 	}
 	
 	//TODO: a lot of redundancy here! How can I combine this?

@@ -58,7 +58,7 @@ public class CustomerManagement {
 	public static Customer[] kundeSpeichern (Customer customer, Customer[] customerArray){
 		 
 		customerArray = customerArrayVergroessern(customer, customerArray);
-		Utility.writeCustomersToFile(customerArray);
+		Utility.writeUsersToFile(customerArray);
 		return customerArray;
 	}
     

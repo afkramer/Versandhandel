@@ -33,17 +33,17 @@ public final class Gui {
 	 *
 	 * @return Ein Customer object.
 	 */
-	public static Customer login(Customer[] customerArray) {
+	public static User login(User[] users) {
 
-		Customer customer;
+		User user;
 
 		while (true) {
 
 			try {
 				int kundennummer = InputUtility.getCustomerNumber();
-				if (CustomerManagement.isCustomerNumberValid(kundennummer, customerArray)) {
-					customer = CustomerManagement.returnCustomer(kundennummer, customerArray);
-					System.out.println("Herzlich Willkommen " + customer.getFirstName() + "");
+				if (CustomerManagement.isCustomerNumberValid(kundennummer, users)) {
+					user = CustomerManagement.returnCustomer(kundennummer, users);
+					System.out.println("Herzlich Willkommen " + user.getFirstName() + "");
 					break;
 
 				} else {
@@ -58,7 +58,7 @@ public final class Gui {
 
 		InputUtility.waitingForPressingEnter();
 
-		return customer;
+		return user;
 
 	}
 	
@@ -67,7 +67,7 @@ public final class Gui {
 		System.out.println("Deine neue Kundennummer lautet " + customer.getUserId());
 	}
 
-	public static Customer[] showMenu(Customer customer, Customer[] customers, Car[] carArray) {
+	public static User[] showMenu(User user, User[] users, Car[] cars) {
 		int menge;
 
 		while (true) {
@@ -79,15 +79,15 @@ public final class Gui {
 					break;
 
 				} else if (choice == 2) {
-					CustomerManagement.changeData(customer);
-					Utility.writeCustomersToFile(customers);
+					CustomerManagement.changeData(user);
+					Utility.writeUsersToFile(users);
 
 				} else if (choice == 3) {
-					showProduct(carArray);
-					Car car = InputUtility.getDesiredProduct(carArray);
+					showProduct(cars);
+					Car car = InputUtility.getDesiredProduct(cars);
 					menge = InputUtility.getAmountOfProducts();
-					Invoice invoice = new Invoice(customer, car, menge);
-					showInvoice(customer, car, invoice);
+					Invoice invoice = new Invoice(user, car, menge);
+					showInvoice(user, car, invoice);
 					
 				} else if (choice == 4){
 					//TODO: delete customer, only if the user is an administrator
@@ -100,7 +100,7 @@ public final class Gui {
 			}
 		}
 
-		return customers;
+		return users;
 	}
 
 	public static void showProduct(Car[] carArray) {
@@ -130,9 +130,9 @@ public final class Gui {
 	 *
 	 * @param kundennummer Die dem Kunden zugeteilte Nummer.
 	 */
-	public static void verabschiedung(Customer customer) {
+	public static void verabschiedung(User user) {
 
-		System.out.println("\n\n\nVielen Dank für Ihren Besuch " + customer.getFirstName() + "!\n");
+		System.out.println("\n\n\nVielen Dank für Ihren Besuch " + user.getFirstName() + "!\n");
 	}
 
 	public static void showInvoice(Customer customer, Car car, Invoice invoice) {
