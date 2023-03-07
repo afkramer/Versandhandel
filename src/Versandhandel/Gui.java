@@ -40,7 +40,7 @@ public final class Gui {
 		while (true) {
 
 			try {
-				int kundennummer = InputUtility.getCustomerNumber();
+				int kundennummer = InputUtility.getUserId();
 				if (UserManagement.isUserNumberValid(kundennummer, users)) {
 					user = UserManagement.returnUserByUserId(kundennummer, users);
 					System.out.println("Herzlich Willkommen " + user.getFirstName() + "");
@@ -69,6 +69,7 @@ public final class Gui {
 
 	public static User[] showMenu(User user, User[] users, Car[] cars) {
 		int menge;
+		UserType userType = user.getUserType();
 
 		while (true) {
 
@@ -83,25 +84,29 @@ public final class Gui {
 					Utility.writeUsersToFile(users);
 
 				} else if (choice == 3) {
-					if (user.getUserType().equals(UserType.ADMINISTRATOR)) {
-						showNoAccessErrorMessage();
+					if (userType.equals(UserType.ADMINISTRATOR)) {
+						deleteUser(users);
 					} else {
 						showProduct(cars);
 						Car car = InputUtility.getDesiredProduct(cars);
-						menge = InputUtility.getAmountOfProducts();
+						menge = InputUtility.getNumberOfProducts();
 						Invoice invoice = new Invoice( (Customer) user, car, menge);
 						showInvoice((Customer) user, car, invoice);
 					}
 					
 				} else if (choice == 4){
-					//TODO: delete customer, only if the user is an administrator
+					if (userType.equals(UserType.ADMINISTRATOR)) {
+						users = deleteUser(users);
+					} else {
+						showInvalidInputErrorMessage();
+					}
 					
 				} else {
-					System.out.println("Falsche Eingabe. Bitte versuchen Sie es erneut.");
+					showInvalidInputErrorMessage ();
 				}
 
 			} catch (NumberFormatException nfe) {
-				System.out.println("Bitte versuchen Sie es erneut.");
+				showInvalidInputErrorMessage ();
 			}
 		}
 
@@ -128,6 +133,14 @@ public final class Gui {
 	public static void showProduct(Car car) {
 		System.out.println(car);
 		System.out.println();
+	}
+	
+	public static User[] deleteUser(User[] users) {
+		System.out.println("Welchen Kunden möchten Sie löschen?\n");
+		int userId = InputUtility.getUserId();
+		String firstName = InputUtility.getFirstNameInput();
+		String lastName = InputUtility.getSurnameInput();
+		return UserManagement.deleteUser(firstName, lastName, userId, users);
 	}
 
 	/**
@@ -206,6 +219,10 @@ public final class Gui {
 		
 		sb.append("\n\n\n");
 		System.out.print(sb);
+	}
+	
+	public static void showUserDeletionSuccessMessage() {
+		System.out.println("Sie haben den Kunden erfolgreich gelöscht.");
 	}
 	
 	public static void showProductDoesNotExist() {

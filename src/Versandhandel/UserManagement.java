@@ -94,7 +94,7 @@ public class UserManagement {
 	public static void changeData(User user) {
 		int choice;
 		while (true) {
-			choice = InputUtility.getUserData();
+			choice = InputUtility.getUserFieldToChange();
 
 			if (choice == 1) {
 				user.setFirstName(InputUtility.getFirstNameInput());
@@ -129,6 +129,7 @@ public class UserManagement {
 					newIndex++; 
 				}
 			}
+			Gui.showUserDeletionSuccessMessage();
 			return newUsers; 
 		} else {
 			Gui.showDeleteErrorMessage();

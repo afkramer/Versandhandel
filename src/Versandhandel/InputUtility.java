@@ -82,8 +82,11 @@ public class InputUtility {
 		System.out.println("Password:");
 		return sc.nextLine();
 	}
+	
+	//TODO: enter product characteristics here so that the administrator can change car attributes
 
-	public static int getCustomerNumber() {
+	//TODO: what happens if they enter something that's not an int??
+	public static int getUserId() {
 		System.out.println("Bitte geben Sie hier Ihre Kundennummer ein: ");
 		return Integer.parseInt(sc.nextLine());
 	}
@@ -135,7 +138,7 @@ public class InputUtility {
 	 * @param sc Scanner zum einlesen der Kundeneingaben
 	 * @return Gewünschte Menge, die der Kunde eingegeben hat.
 	 */
-	public static int getAmountOfProducts() {
+	public static int getNumberOfProducts() {
 
 		while (true) {
 
@@ -150,7 +153,11 @@ public class InputUtility {
 
 	}
 
-	public static int getUserData() {
+	//TODO: put this closer to the methods that have to do with updating the customer
+	//TODO: change method definition to include UserType parameter
+	//TODO: based on user type, also allow the user to change password (if Admin)
+	//TODO: check where else we need to allow the user to select choice 8 (change password)
+	public static int getUserFieldToChange() {
 		while (true) {
 			System.out.println("Welche Daten möchten Sie ändern?");
 			System.out.println("1) Vorname");
@@ -166,6 +173,11 @@ public class InputUtility {
 				Gui.showInvalidInputErrorMessage(); 
 			}
 		}
+	}
+	
+	//TODO: implement as in method above
+	public static int getCarFieldToChange() {
+		return 0;
 	}
 
 }
