@@ -83,7 +83,8 @@ public final class Gui {
 					showProduct(carArray);
 					Car car = InputUtility.getDesiredProduct(carArray);
 					menge = InputUtility.getAmountOfProducts();
-					showInvoice(customer, car, menge);
+					Invoice invoice = new Invoice(customer, car, menge);
+					showInvoice(customer, car, invoice);
 					
 				} else if (choice == 4){
 					//TODO: delete customer, only if the user is an administrator
@@ -131,7 +132,7 @@ public final class Gui {
 		System.out.println("\n\n\nVielen Dank für Ihren Besuch " + customer.getFirstName() + "!\n");
 	}
 
-	public static void showInvoice(Customer customer, Car car, int quantity) {
+	public static void showInvoice(Customer customer, Car car, Invoice invoice) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(String.format("%n%n%s %s%n", customer.getFirstName(), customer.getSurname()));
 		sb.append(String.format("%s %s%n", customer.getStreet(), customer.getHouseNumber()));
@@ -148,28 +149,40 @@ public final class Gui {
 		sb.append(String.format("%03d", 1));
 		sb.append(String.format("%4s", ""));
 		sb.append(String.format("%-20s", car.getProductName()));
-		sb.append(String.format("%-9d", quantity));
+		sb.append(String.format("%-9d", invoice.getQuantity()));
 		sb.append(String.format("%-,9.2f€", car.getProductPrice()));
-		sb.append(String.format("%,12.2f€%n%n", CarManagement.totalPrice(quantity, car)));
+		sb.append(String.format("%,12.2f€%n%n", invoice.getTotalPrice()));
 		sb.append(String.format("%s", car.getProductDescription()));
 		sb.append("\n");
 		sb.append(String.format((new String(new char[100])).replace("\0", "_")));
 		sb.append("\n");
 		sb.append(String.format("%26s", ""));
 		sb.append(String.format("%20s", "Zwischensumme Netto:"));
-		sb.append(String.format("%,12.2f€", CarManagement.totalPrice(quantity, car)
-				- CarManagement.mehrwertsteuer(CarManagement.totalPrice(quantity, car), CarManagement.TAX)));
+		sb.append(String.format("%,12.2f€", invoice.getNetPrice()));
 		sb.append("\n");
 		sb.append(String.format("%26s", ""));
 		sb.append(String.format("%20s", "Mehrwertsteuer:"));
-		sb.append(String.format("%,12.2f€", CarManagement.mehrwertsteuer(CarManagement.totalPrice(quantity, car), CarManagement.TAX)));
+		sb.append(String.format("%,12.2f€", invoice.getIncludedTax()));
+		
+		
+		if (customer.getUserType().equals(UserType.PREMIUM_CUSTOMER)) {
+			sb.append(String.format("%26s", ""));
+			sb.append(String.format("%20s", "Zwischensumme Netto:"));
+			sb.append(String.format("%,12.2f€", invoice.getNetPrice()));
+			sb.append("\n");
+			sb.append(String.format("%26s", ""));
+			sb.append(String.format("%20s", "Mehrwertsteuer:"));
+			sb.append(String.format("%,12.2f€", invoice.getIncludedTax()));
+			
+		}
+		
 		sb.append("\n");
 		sb.append(String.format("%26s", ""));
 		sb.append(String.format((new String(new char[35])).replace("\0", "_")));
 		sb.append("\n");
 		sb.append(String.format("%26s", ""));
 		sb.append(String.format("%20s", "Gesamtbetrag:"));
-		sb.append(String.format("%,12.2f€", CarManagement.totalPrice(quantity, car)));
+		sb.append(String.format("%,12.2f€", invoice.getTotalPrice()));
 		sb.append("\n\n\n");
 		System.out.print(sb);
 	}

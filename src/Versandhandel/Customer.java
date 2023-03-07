@@ -43,11 +43,6 @@ public class Customer extends User {
 	public void setDiscount(double discount) {
 		this.discount = discount;
 	}
-
-	
-	public double applyDiscount(double total) {
-		return total * (1 - this.discount);
-	}
 	
 	@Override
 	public String toString(){
