@@ -22,6 +22,18 @@ public class Customer extends User {
 	
 	public void setTotalSales(double totalSales) {
 		this.totalSales = totalSales;
+		updatePremiumStatus();
+	}
+	
+	public void addToTotalSales(double sale) {
+		totalSales += sale;
+		updatePremiumStatus();
+	}
+	
+	public void updatePremiumStatus() {
+		if (this.totalSales >= 10000.0) {
+			setUserType(UserType.PREMIUM_CUSTOMER);
+		}
 	}
 	
 	public double getDiscount() {
@@ -31,10 +43,7 @@ public class Customer extends User {
 	public void setDiscount(double discount) {
 		this.discount = discount;
 	}
-	
-	public void addToTotalSales(double sale) {
-		totalSales += sale;
-	}
+
 	
 	public double applyDiscount(double total) {
 		return total * (1 - this.discount);
