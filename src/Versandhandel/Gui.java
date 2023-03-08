@@ -4,9 +4,14 @@ package Versandhandel;
 //TODO: wollen wir wirklich immer, dass der Kunde Enter drucken muss?
 
 public final class Gui {
-
-	private static final String BLUE_TEXT = "\u001B[34m";
-	private static final String ANSCI_RESET = "\u001B[0m";
+	
+	public static final String CYAN_TEXT = "\u001B[36m";
+    public static final String GREEN_TEXT = "\u001B[32m";
+    public static final String YELLOW_TEXT = "\u001B[33m";
+    public static final String PURPLE_TEXT = "\u001B[35m";
+    public static final String BLUE_TEXT = "\u001B[34m";
+    public static final String RED_TEXT = "\u001B[31m";
+    public static final String ANSCI_RESET = "\u001B[0m";
 
 	private Gui() {
 	}

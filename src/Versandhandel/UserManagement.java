@@ -7,11 +7,13 @@ public class UserManagement {
 	
 	private UserManagement() {}
 	
+	@TestMethod(reason = "Database is empty")
 	public static User[] createCustomers () {
 		Customer max = new Customer("Max", "Mustermann", "Volkswagenweg", "1", "38440", "Wolfsburg");
 		Customer mareike = new Customer ("Mareike", "Musterfrau", "Audiweg", "2", "38100", "Braunschweig"); 
 		Customer lara = new Customer ("Lara", "Schneider", "Skodaweg", "3", "38446", "Wolfsburg");
-		return assignCustomerNumber(max, mareike, lara);
+		Administrator fran = new Administrator("Fran", "Awesomegal", "Grub Street", "65", "34889", "Painted Post");
+		return assignCustomerNumber(max, mareike, lara, fran);
 	}
 
 	//TODO: show the new customer number!

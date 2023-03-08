@@ -10,7 +10,11 @@ public class Administrator extends User {
 	}
 	
 	public Administrator(int userId, String firstName, String surname, String street, String houseNumber, String zipCode, String city) {
-		this(userId, UserType.ADMINISTRATOR, firstName, surname, street, houseNumber, zipCode, city, null);
+		this(userId, UserType.ADMINISTRATOR, firstName, surname, street, houseNumber, zipCode, city, "startPassword");
+	}
+
+	public Administrator (String firstName, String surname, String street, String houseNumber, String zipCode, String city) {
+		this(0, firstName, surname, street, houseNumber, zipCode, city);
 	}
 	
 	public String getPassword() {
