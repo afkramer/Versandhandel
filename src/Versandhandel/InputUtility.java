@@ -82,11 +82,28 @@ public class InputUtility {
 		System.out.println("Password:");
 		return sc.nextLine();
 	}
-	
-	//TODO: enter product characteristics here so that the administrator can change car attributes
 
-	//TODO: what happens if they enter something that's not an int??
-	public static int getUserId() {
+	
+	
+	public static String getCarNameInput() {
+		System.out.println("Auto Name:");
+		return sc.nextLine();
+	}
+	
+	//TODO: error handling!
+	public static double getCarPriceInput() {
+		System.out.println("Auto Preis:");
+		return Double.parseDouble(sc.nextLine());
+	}
+	
+	public static String getCarDescriptionInput() {
+		System.out.println("Auto Beschreibung:");
+		return sc.nextLine();
+	}
+	
+	
+	//TODO: error handling
+	public static int getUserIdInput() {
 		System.out.println("Bitte geben Sie hier Ihre Kundennummer ein: ");
 		return Integer.parseInt(sc.nextLine());
 	}
@@ -157,16 +174,22 @@ public class InputUtility {
 	//TODO: change method definition to include UserType parameter
 	//TODO: based on user type, also allow the user to change password (if Admin)
 	//TODO: check where else we need to allow the user to select choice 8 (change password)
-	public static int getUserFieldToChange() {
+	public static int getUserFieldToChange(User user) {
 		while (true) {
-			System.out.println("Welche Daten möchten Sie ändern?");
+			System.out.println("Welche Kundendaten möchten Sie ändern?\n");
+			System.out.println("0) Zurück zum Hauptmenü\n");
+			
 			System.out.println("1) Vorname");
 			System.out.println("2) Nachname");
 			System.out.println("3) Straße");
 			System.out.println("4) Hausnummer");
 			System.out.println("5) Postleitzahl");
 			System.out.println("6) Stadt");
-			System.out.println("7) Zurück zum Hauptmenü");
+			
+			if (user.getUserType().equals(UserType.ADMINISTRATOR)) {
+				System.out.println("7) Passwort");
+			}
+			
 			try {
 				return Integer.parseInt(sc.nextLine());
 			} catch (NumberFormatException nfe) {
@@ -175,9 +198,20 @@ public class InputUtility {
 		}
 	}
 	
-	//TODO: implement as in method above
 	public static int getCarFieldToChange() {
-		return 0;
+		while(true) {
+			System.out.println("Welche Autodaten möchten Sie ändern?\n");
+			System.out.println("0) Zurück zum Hauptmenü");
+			
+			System.out.println("1) Product name");
+			System.out.println("2) Product price");
+			System.out.println("3) Product description");
+			try {
+				return Integer.parseInt(sc.nextLine());
+			} catch (NumberFormatException nfe) {
+				Gui.showInvalidInputErrorMessage();
+			}
+		}
 	}
 
 }

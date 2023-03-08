@@ -40,10 +40,21 @@ public final class Gui {
 		while (true) {
 
 			try {
-				int kundennummer = InputUtility.getUserId();
+				int kundennummer = InputUtility.getUserIdInput();
 				if (UserManagement.isUserNumberValid(kundennummer, users)) {
 					user = UserManagement.returnUserByUserId(kundennummer, users);
-					System.out.println("Herzlich Willkommen " + user.getFirstName() + "");
+					if (user instanceof Customer) {
+						greetUser(user);
+					} else if (user instanceof Administrator){
+						if (isPasswordValid((Administrator) user)) {
+							greetUser(user);
+						} else {
+							user = null;
+						}
+					} else {
+						showGeneralErrorMessage();
+					}
+					
 					break;
 
 				} else {
@@ -60,6 +71,29 @@ public final class Gui {
 
 		return user;
 
+	}
+	
+	public static void greetUser(User user) {
+		if (user instanceof Customer) {
+			System.out.println("Herzlich Willkommen " + user.getFirstName());
+		} else {
+			System.out.println("Hallo Administrator " + user.getFirstName());
+		}
+	}
+	
+	public static boolean isPasswordValid(Administrator admin) {
+		String password;
+		for(int i = 0; i < 3; i++) {
+			System.out.println("Bitte geben Sie Ihr Passwort ein:");
+			password = InputUtility.getPasswordInput();
+			if (password == admin.getPassword()) {
+				return true;
+			} else {
+				System.out.println("Das ist nicht richtig. Verbleibende Versuche " + (3 - i) + ".");
+			}
+		}
+		System.out.println("Sie haben zu viele Fehlversuche gehabt.");
+		return false;
 	}
 	
 	public static void showRegistrationResults(Customer customer) {
@@ -137,7 +171,7 @@ public final class Gui {
 	
 	public static User[] deleteUser(User[] users) {
 		System.out.println("Welchen Kunden möchten Sie löschen?\n");
-		int userId = InputUtility.getUserId();
+		int userId = InputUtility.getUserIdInput();
 		String firstName = InputUtility.getFirstNameInput();
 		String lastName = InputUtility.getSurnameInput();
 		return UserManagement.deleteUser(firstName, lastName, userId, users);
@@ -225,6 +259,24 @@ public final class Gui {
 		System.out.println("Sie haben den Kunden erfolgreich gelöscht.");
 	}
 	
+	public static void showProductChangeSuccessMessage(Car car) {
+		System.out.println("Sie haben die Fahrzeugdaten erfolgreich geändert:");
+		System.out.println(car);
+	}
+	
+	public static void showUserChangeSuccessMessage(User user) {
+		System.out.println("Sie haben die Userdaten erfolgreich geändert:");
+		if (user instanceof Customer) {
+			Customer customer = (Customer) user;
+			System.out.println(customer);
+		} else if (user instanceof Administrator) {
+			Administrator admin = (Administrator) user;
+			System.out.println(admin);
+		} else {
+			showGeneralErrorMessage();
+		}
+	}
+	
 	public static void showProductDoesNotExist() {
 		System.out.println("Diese Produktnummer existiert nicht. Bitte versuchen Sie es erneut.");
 	}
@@ -245,5 +297,9 @@ public final class Gui {
 	}
 	public static void showInvalidInputErrorMessage () {
 		System.out.println("Ihre Eingabe ist fehlerhaft. Bitte versuchen Sie es erneut."); 
+	}
+	
+	public static void showGeneralErrorMessage() {
+		System.out.println("Es gab ein Problem.");
 	}
 }

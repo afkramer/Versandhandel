@@ -21,11 +21,14 @@ public class Versandhandel {
 				users = UserManagement.saveUser(user, users);
 			} else if (output == "login"){
 				user = Gui.login(users);
-				users = Gui.showMenu(user, users, cars);
+				if (user != null) {
+					users = Gui.showMenu(user, users, cars);
+				}
+				
 			} else if (output == "quit"){ 
 				break;
 			} else {
-				System.out.println("Error!");
+				Gui.showGeneralErrorMessage();
 			}
 		}
 		

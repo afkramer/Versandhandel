@@ -3,6 +3,7 @@ package Versandhandel;
 public class UserManagement {
 
 	private static final int CUSTOMER_NUMBER_LENGTH = 6;
+	public static final double THRESHOLD_FOR_PREMIUM_STATUS = 70000.0;
 	
 	private UserManagement() {}
 	
@@ -74,7 +75,6 @@ public class UserManagement {
 		}
 		return false;
 	}
-
 	
 	/**
 	* Der entsprechende Kunde zu einer Kundennummer zurückgeben
@@ -94,9 +94,11 @@ public class UserManagement {
 	public static void changeData(User user) {
 		int choice;
 		while (true) {
-			choice = InputUtility.getUserFieldToChange();
+			choice = InputUtility.getUserFieldToChange(user);
 
-			if (choice == 1) {
+			if (choice == 0) {
+				break;
+			} else if (choice == 1) {
 				user.setFirstName(InputUtility.getFirstNameInput());
 			} else if (choice == 2) {
 				user.setSurname(InputUtility.getSurnameInput());
@@ -108,10 +110,11 @@ public class UserManagement {
 				user.setZipCode(InputUtility.getZipCodeInput());
 			} else if (choice == 6) {
 				user.setCity(InputUtility.getCityInput());
-			} else if (choice == 7) {
-				break;
+			} else if (choice == 7 && user instanceof Administrator) {
+				Administrator admin = (Administrator) user;
+				admin.setPassword(InputUtility.getPasswordInput());
 			} else {
-				System.out.println("Bitte geben Sie eine Zahl von 1-7 ein.");
+				Gui.showInvalidInputErrorMessage();
 			}
 		} 
 	}

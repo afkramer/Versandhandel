@@ -21,31 +21,28 @@ public final class CarManagement {
 		return null;
 	}
 
-	//TODO: change this to use the inpututility to get new data and then update the car
 	public static void changeData(Car car) {
 		int choice;
 		while (true) {
-			choice = InputUtility.getCarData();
+			choice = InputUtility.getCarFieldToChange();
 
-			if (choice == 1) {
-				user.setFirstName(InputUtility.getFirstNameInput());
-			} else if (choice == 2) {
-				user.setSurname(InputUtility.getSurnameInput());
-			} else if (choice == 3) {
-				user.setStreet(InputUtility.getStreetInput());
-			} else if (choice == 4) {
-				user.setHouseNumber(InputUtility.getHouseNumberInput());
-			} else if (choice == 5) {
-				user.setZipCode(InputUtility.getZipCodeInput());
-			} else if (choice == 6) {
-				user.setCity(InputUtility.getCityInput());
-			} else if (choice == 7) {
+			if (choice == 0) {
 				break;
+			} else if (choice == 1) {
+				car.setProductName(InputUtility.getCarNameInput());
+				Gui.showProductChangeSuccessMessage(car);
+			} else if (choice == 2) {
+				car.setProductPrice(InputUtility.getCarPriceInput());
+				Gui.showProductChangeSuccessMessage(car);
+			} else if (choice == 3) {
+				car.setProductDescription(InputUtility.getCarDescriptionInput());
+				Gui.showProductChangeSuccessMessage(car);
 			} else {
-				System.out.println("Bitte geben Sie eine Zahl von 1-7 ein.");
+				Gui.showInvalidInputErrorMessage();
 			}
 		} 
 	}
+	
 	
 	/**
 	 * Die Methode berechnet die Mehrwertsteuer.

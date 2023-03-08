@@ -30,14 +30,14 @@ public class Customer extends User {
 	}
 	
 	public void updatePremiumStatus() {
-		if (this.totalSales >= 10000.0) {
+		if (this.totalSales >= UserManagement.THRESHOLD_FOR_PREMIUM_STATUS) {
 			setUserType(UserType.PREMIUM_CUSTOMER);
 			this.discount = 0.03;
 		}
 	}
 	
 	public void updatePremiumStatus(double currentSaleTotal) {
-		if (this.totalSales + currentSaleTotal >= 10000.0) {
+		if (this.totalSales + currentSaleTotal >= UserManagement.THRESHOLD_FOR_PREMIUM_STATUS) {
 			setUserType(UserType.PREMIUM_CUSTOMER);
 			this.discount = 0.03;
 		}

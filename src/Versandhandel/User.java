@@ -116,6 +116,6 @@ public class User {
 	}
 	
 	public String toCSVFormat () {
-		return userId + ";" + userType + ";" + firstName + ";" + surname + ";" + street + ";" + houseNumber + ";" + zipCode + ";" + city + ";";
+		return userId + ";" + userType.germanText + ";" + firstName + ";" + surname + ";" + street + ";" + houseNumber + ";" + zipCode + ";" + city + ";";
 	}
 }
