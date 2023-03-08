@@ -1,7 +1,7 @@
 package Versandhandel;
 
 public final class CarManagement {
-	public static final double TAX = 0.19;
+	public static final double TAX = 119;
 
 	// Create methode, die Produkte in der Product Array anlegt
 	public static Car[] createCars() {
@@ -52,8 +52,9 @@ public final class CarManagement {
 	 * @return Die Mehrwertsteuer wird auf zwei Nachkommastellen gerundet
 	 *         ausgeggeben
 	 */
-	public static double calculateIncludedTax(double totalPrice, double mwstSatz) {
-		return Math.round(totalPrice * mwstSatz * 100) / 100.0;
+	public static double calculateIncludedTax(double totalPrice) {
+		double netPrice = totalPrice / TAX * 100;
+		return Math.round((totalPrice - netPrice) * 100) / 100.0;
 	}
 
 	/**

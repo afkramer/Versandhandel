@@ -86,10 +86,10 @@ public final class Gui {
 		for(int i = 0; i < 3; i++) {
 			System.out.println("Bitte geben Sie Ihr Passwort ein:");
 			password = InputUtility.getPasswordInput();
-			if (password == admin.getPassword()) {
+			if (password.equals(admin.getPassword())) {
 				return true;
 			} else {
-				System.out.println("Das ist nicht richtig. Verbleibende Versuche " + (3 - i) + ".");
+				System.out.println("Das ist nicht richtig. Verbleibende Versuche " + (2 - i) + ".");
 			}
 		}
 		System.out.println("Sie haben zu viele Fehlversuche gehabt.");
@@ -119,10 +119,13 @@ public final class Gui {
 
 				} else if (choice == 3) {
 					if (userType.equals(UserType.ADMINISTRATOR)) {
-						deleteUser(users);
+						users = deleteUser(users);
+						Utility.writeUsersToFile(users);
 					} else {
+						//TODO if time: this should be in a separate method
+						// for example Utility.sellProduct();
 						showProduct(cars);
-						Car car = InputUtility.getDesiredProduct(cars);
+						Car car = InputUtility.getDesiredProduct(cars, "kaufen");
 						menge = InputUtility.getNumberOfProducts();
 						Invoice invoice = new Invoice( (Customer) user, car, menge);
 						showInvoice((Customer) user, car, invoice);
@@ -130,7 +133,10 @@ public final class Gui {
 					
 				} else if (choice == 4){
 					if (userType.equals(UserType.ADMINISTRATOR)) {
-						users = deleteUser(users);
+						showProduct(cars);
+						Car car = InputUtility.getDesiredProduct(cars, "ändern");
+						CarManagement.changeData(car);
+						Utility.writeCarsToFile(cars);
 					} else {
 						showInvalidInputErrorMessage();
 					}
@@ -183,8 +189,11 @@ public final class Gui {
 	 * @param kundennummer Die dem Kunden zugeteilte Nummer.
 	 */
 	public static void verabschiedung(User user) {
-
-		System.out.println("\n\n\nVielen Dank für Ihren Besuch " + user.getFirstName() + "!\n");
+		if (user == null) {
+			System.out.println("\n\n\nVielen Dank für Ihren Besuch.");
+		} else {
+			System.out.println("\n\n\nVielen Dank für Ihren Besuch " + user.getFirstName() + "!\n");
+		}
 	}
 
 	public static void showInvoice(Customer customer, Car car, Invoice invoice) {

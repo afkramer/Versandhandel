@@ -104,17 +104,17 @@ public class InputUtility {
 	
 	//TODO: error handling
 	public static int getUserIdInput() {
-		System.out.println("Bitte geben Sie hier Ihre Kundennummer ein: ");
+		System.out.println("Bitte geben Sie hier Ihre User-ID ein: ");
 		return Integer.parseInt(sc.nextLine());
 	}
 
 	public static int getUserChoiceForMenu(User user) {
 		while (true) {
-			System.out.println("Bitte wählen Sie eine der drei Möglichkeiten:\n");
+			System.out.println("Bitte wählen Sie eine der vier Möglichkeiten:\n");
 			System.out.println("Drücken Sie die Taste 1, um sich auszuloggen.");
 			System.out.println("Drücken Sie die Taste 2, um Ihre Angaben zu ändern.");
 			if (user.getUserType().equals(UserType.ADMINISTRATOR)) {
-				System.out.println("Drücken Sie die Taste 3, wenn Sie einen Kunden löschen möchten.");
+				System.out.println("Drücken Sie die Taste 3, wenn Sie einen User löschen möchten.");
 				System.out.println("Drücken Sie die Taste 4, wenn Sie Produktdaten anpassen möchten.");
 			} else {
 				System.out.println("Drücken Sie die Taste 3, wenn Sie ein Auto kaufen möchten.");
@@ -128,12 +128,12 @@ public class InputUtility {
 		}
 	}
 	
-	public static Car getDesiredProduct(Car[] cars) {
+	public static Car getDesiredProduct(Car[] cars, String action) {
 		int productNumber;
 		Car car;
 		
 		while (true) {
-			System.out.println("Welches Auto würden Sie gerne kaufen?");
+			System.out.println("Welches Fahrzeug würden Sie gerne " + action + "?");
 			System.out.println("Bitte geben Sie die gewünschte Produktnummer ein:");
 			try {
 				productNumber = Integer.parseInt(sc.nextLine());
@@ -200,12 +200,12 @@ public class InputUtility {
 	
 	public static int getCarFieldToChange() {
 		while(true) {
-			System.out.println("Welche Autodaten möchten Sie ändern?\n");
+			System.out.println("Welche Fahrzeugdaten möchten Sie ändern?\n");
 			System.out.println("0) Zurück zum Hauptmenü");
 			
-			System.out.println("1) Product name");
-			System.out.println("2) Product price");
-			System.out.println("3) Product description");
+			System.out.println("1) Fahrzeugname");
+			System.out.println("2) Fahrzeugpreis");
+			System.out.println("3) Fahrzeug Beschreibung");
 			try {
 				return Integer.parseInt(sc.nextLine());
 			} catch (NumberFormatException nfe) {

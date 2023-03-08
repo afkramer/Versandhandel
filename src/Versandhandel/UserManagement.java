@@ -124,7 +124,7 @@ public class UserManagement {
 		User user = returnUserByUserId(userId, users);
 		
 		if (user != null && user.getFirstName().equals(firstName) && user.getSurname().equals(lastName)){
-			User[] newUsers = new Customer[users.length - 1]; 
+			User[] newUsers = new User[users.length - 1]; 
 			int newIndex = 0; 
 			for (int i = 0; i < users.length; i++) { 
 				if (userId != users[i].getUserId()) {

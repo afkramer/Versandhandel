@@ -17,16 +17,16 @@ public class Invoice {
 		this.customer = customer;
 		this.quantity = quantity;
 		this.totalPrice = CarManagement.calculateTotalPrice(quantity, car);
-		this.includedTax = CarManagement.calculateIncludedTax(this.totalPrice, CarManagement.TAX);
+		this.includedTax = CarManagement.calculateIncludedTax(this.totalPrice);
 		this.netPrice = totalPrice - includedTax;
 		customer.updatePremiumStatus(this.netPrice);
 		applyDiscount();
-		customer.addToTotalSales(discountedNetPrice);
+		customer.addToTotalSales(discountedNetPrice); 
 	}
 	
 	public void applyDiscount() {
 		this.discountedNetPrice = this.netPrice * (1 - customer.getDiscount());
-		this.discountedIncludedTax = discountedNetPrice * CarManagement.TAX;
+		this.discountedIncludedTax = this.includedTax * (1 - customer.getDiscount());
 		this.discountedTotalPrice = discountedNetPrice + discountedIncludedTax;
 	}
 	
