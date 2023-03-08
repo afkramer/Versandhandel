@@ -18,7 +18,9 @@ public class InputUtility {
 		String output;
 
 		while (true) {
-			System.out.println("Bitte wählen Sie einer der drei Möglichkeiten aus:");
+			System.out.print(Gui.CYAN_TEXT);
+			System.out.println("Bitte wählen Sie einer der drei Möglichkeiten aus:\n");
+			System.out.print(Gui.ANSCI_RESET);
 			System.out.println("Drücken Sie die Taste 1, wenn Sie sich registrieren wollen.");
 			System.out.println("Drücken Sie die Taste 2, wenn Sie sich einloggen wollen.");
 			System.out.println("Drücken Sie die Taste 3, wenn Sie das Programm beenden wollen.");
@@ -37,11 +39,11 @@ public class InputUtility {
 					break;
 
 				} else {
-					System.out.println("Falsche Eingabe. Bitte versuchen Sie es erneut.");
+					Gui.showInvalidInputErrorMessage();
 				}
 
 			} catch (NumberFormatException nfe) {
-				System.out.println("Bitte versuchen Sie es erneut.");
+				Gui.showInvalidInputErrorMessage();
 			}
 
 		}
@@ -49,68 +51,108 @@ public class InputUtility {
 	}
 
 	public static String getFirstNameInput() {
+		System.out.print(Gui.CYAN_TEXT);
 		System.out.println("Vorname:");
+		System.out.print(Gui.ANSCI_RESET);
 		return sc.nextLine();
 	}
 
 	public static String getSurnameInput() {
+		System.out.print(Gui.CYAN_TEXT);
 		System.out.println("Nachname:");
+		System.out.print(Gui.ANSCI_RESET);
 		return sc.nextLine();
 	}
 
 	public static String getStreetInput() {
+		System.out.print(Gui.CYAN_TEXT);
 		System.out.println("Straße:");
+		System.out.print(Gui.ANSCI_RESET);
 		return sc.nextLine();
 	}
 
 	public static String getHouseNumberInput() {
+		System.out.print(Gui.CYAN_TEXT);
 		System.out.println("Hausnummer:");
+		System.out.print(Gui.ANSCI_RESET);
 		return sc.nextLine();
 	}
 
 	public static String getZipCodeInput() {
+		System.out.print(Gui.CYAN_TEXT);
 		System.out.println("Postleitzahl:");
+		System.out.print(Gui.ANSCI_RESET);
 		return sc.nextLine();
 	}
 
 	public static String getCityInput() {
+		System.out.print(Gui.CYAN_TEXT);
 		System.out.println("Stadt:");
+		System.out.print(Gui.ANSCI_RESET);
 		return sc.nextLine();
 	}
 	
 	public static String getPasswordInput() {
-		System.out.println("Password:");
+		System.out.print(Gui.CYAN_TEXT);
+		System.out.println("Passwort:");
+		System.out.print(Gui.ANSCI_RESET);
 		return sc.nextLine();
 	}
 
 	
 	
 	public static String getCarNameInput() {
-		System.out.println("Auto Name:");
+		System.out.print(Gui.CYAN_TEXT);
+		System.out.println("Fahrzeugname:");
+		System.out.print(Gui.ANSCI_RESET);
 		return sc.nextLine();
 	}
 	
 	//TODO: error handling!
 	public static double getCarPriceInput() {
-		System.out.println("Auto Preis:");
-		return Double.parseDouble(sc.nextLine());
+		while(true) {
+			System.out.print(Gui.CYAN_TEXT);
+			System.out.println("Fahrzeugpreis:");
+			System.out.print(Gui.ANSCI_RESET);
+			try {
+				return Double.parseDouble(sc.nextLine());
+			} catch (NumberFormatException nfe) {
+				Gui.showInvalidInputErrorMessage();
+			}
+		}
+		
+		
 	}
 	
 	public static String getCarDescriptionInput() {
-		System.out.println("Auto Beschreibung:");
+		System.out.print(Gui.CYAN_TEXT);
+		System.out.println("Fahrzeugbeschreibung:");
+		System.out.print(Gui.ANSCI_RESET);
 		return sc.nextLine();
 	}
 	
 	
 	//TODO: error handling
 	public static int getUserIdInput() {
-		System.out.println("Bitte geben Sie hier Ihre User-ID ein: ");
-		return Integer.parseInt(sc.nextLine());
+		while(true) {
+			System.out.print(Gui.CYAN_TEXT);
+			System.out.println("Bitte geben Sie hier Ihre User-ID ein: ");
+			System.out.print(Gui.ANSCI_RESET);
+			try {
+				return Integer.parseInt(sc.nextLine());
+			} catch (NumberFormatException nfe) {
+				Gui.showInvalidInputErrorMessage();
+			}
+			
+		}
+		
 	}
 
 	public static int getUserChoiceForMenu(User user) {
 		while (true) {
-			System.out.println("Bitte wählen Sie eine der vier Möglichkeiten:\n");
+			System.out.print(Gui.CYAN_TEXT);
+			System.out.println("Bitte wählen Sie eine der vorhandenen Möglichkeiten:\n");
+			System.out.print(Gui.ANSCI_RESET);
 			System.out.println("Drücken Sie die Taste 1, um sich auszuloggen.");
 			System.out.println("Drücken Sie die Taste 2, um Ihre Angaben zu ändern.");
 			if (user.getUserType().equals(UserType.ADMINISTRATOR)) {
@@ -133,8 +175,10 @@ public class InputUtility {
 		Car car;
 		
 		while (true) {
+			System.out.print(Gui.CYAN_TEXT);
 			System.out.println("Welches Fahrzeug würden Sie gerne " + action + "?");
 			System.out.println("Bitte geben Sie die gewünschte Produktnummer ein:");
+			System.out.print(Gui.ANSCI_RESET);
 			try {
 				productNumber = Integer.parseInt(sc.nextLine());
 				car = CarManagement.findCarByProductNumber(productNumber, cars);
@@ -160,11 +204,13 @@ public class InputUtility {
 		while (true) {
 
 			try {
+				System.out.print(Gui.CYAN_TEXT);
 				System.out.println("Bitte geben Sie die gewünschte Menge ein");
+				System.out.print(Gui.ANSCI_RESET);
 				return Integer.parseInt(sc.nextLine()); // T
 
 			} catch (NumberFormatException nfe) {
-				System.out.println("Bitte versuchen Sie es erneut.");
+				Gui.showInvalidInputErrorMessage();
 			}
 		}
 
@@ -176,7 +222,9 @@ public class InputUtility {
 	//TODO: check where else we need to allow the user to select choice 8 (change password)
 	public static int getUserFieldToChange(User user) {
 		while (true) {
+			System.out.print(Gui.CYAN_TEXT);
 			System.out.println("Welche Kundendaten möchten Sie ändern?\n");
+			System.out.print(Gui.ANSCI_RESET);
 			System.out.println("0) Zurück zum Hauptmenü\n");
 			
 			System.out.println("1) Vorname");
@@ -200,12 +248,14 @@ public class InputUtility {
 	
 	public static int getCarFieldToChange() {
 		while(true) {
+			System.out.print(Gui.CYAN_TEXT);
 			System.out.println("Welche Fahrzeugdaten möchten Sie ändern?\n");
-			System.out.println("0) Zurück zum Hauptmenü");
+			System.out.print(Gui.ANSCI_RESET);
+			System.out.println("0) Zurück zum Hauptmenü\n");
 			
 			System.out.println("1) Fahrzeugname");
 			System.out.println("2) Fahrzeugpreis");
-			System.out.println("3) Fahrzeug Beschreibung");
+			System.out.println("3) Fahrzeugbeschreibung");
 			try {
 				return Integer.parseInt(sc.nextLine());
 			} catch (NumberFormatException nfe) {

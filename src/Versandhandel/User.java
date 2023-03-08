@@ -109,7 +109,7 @@ public class User {
 		sb.append(this.firstName + " " + this.surname + "\n\n");
 		sb.append("User Typ: \n");
 		sb.append(this.userType.germanText);
-		sb.append("Adresse: \n");
+		sb.append("\n\nAdresse: \n");
 		sb.append(this.street + " " + this.houseNumber + "\n");
 		sb.append(this.zipCode + " " + this.city + "\n\n"); 
 		return sb.toString();

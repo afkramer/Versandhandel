@@ -22,11 +22,15 @@ public final class Gui {
 	 */
 	public static void showWelcomeScreen() {
 		System.out.println(BLUE_TEXT + "\n\n\n***************************************");
+		System.out.print(PURPLE_TEXT);
 		System.out.println("***************************************");
 		System.out.println("***************************************");
+		System.out.print(CYAN_TEXT);
 		System.out.println("**********Herzlich Willkommen**********");
+		System.out.print(PURPLE_TEXT);
 		System.out.println("***************************************");
 		System.out.println("***************************************");
+		System.out.print(BLUE_TEXT);
 		System.out.println("***************************************\n\n\n" + ANSCI_RESET);
 
 		InputUtility.waitingForPressingEnter();
@@ -50,12 +54,14 @@ public final class Gui {
 					user = UserManagement.returnUserByUserId(kundennummer, users);
 					if (user instanceof Customer) {
 						greetUser(user);
+						
 					} else if (user instanceof Administrator){
 						if (isPasswordValid((Administrator) user)) {
 							greetUser(user);
 						} else {
 							user = null;
 						}
+						
 					} else {
 						showGeneralErrorMessage();
 					}
@@ -63,11 +69,11 @@ public final class Gui {
 					break;
 
 				} else {
-					System.out.println("Sie haben die falsche Kundennummer eingegegen. Bitte versuchen Sie es erneut.");
+					showInvalidInputErrorMessage();
 				}
 
 			} catch (NumberFormatException nfe) {
-				System.out.println("Bitte versuchen Sie es erneut.");
+				showInvalidInputErrorMessage();
 			}
 
 		}
@@ -80,30 +86,42 @@ public final class Gui {
 	
 	public static void greetUser(User user) {
 		if (user instanceof Customer) {
-			System.out.println("Herzlich Willkommen " + user.getFirstName());
+			System.out.print(CYAN_TEXT);
+			System.out.println("\n\nHerzlich Willkommen " + user.getFirstName());
+			System.out.print(ANSCI_RESET);
 		} else {
-			System.out.println("Hallo Administrator " + user.getFirstName());
+			System.out.print(CYAN_TEXT);
+			System.out.println("\n\nHallo Administrator " + user.getFirstName());
+			System.out.print(ANSCI_RESET);
 		}
 	}
 	
 	public static boolean isPasswordValid(Administrator admin) {
 		String password;
 		for(int i = 0; i < 3; i++) {
-			System.out.println("Bitte geben Sie Ihr Passwort ein:");
+			System.out.print(CYAN_TEXT);
+			System.out.println("\nBitte geben Sie Ihr Passwort ein:\n\n");
+			System.out.print(ANSCI_RESET);
 			password = InputUtility.getPasswordInput();
 			if (password.equals(admin.getPassword())) {
 				return true;
 			} else {
-				System.out.println("Das ist nicht richtig. Verbleibende Versuche " + (2 - i) + ".");
+				System.out.print(RED_TEXT);
+				System.out.println("\nDas ist nicht richtig. Verbleibende Versuche " + (2 - i) + ".\n\n");
+				System.out.print(ANSCI_RESET);
 			}
 		}
-		System.out.println("Sie haben zu viele Fehlversuche gehabt.");
+		System.out.print(RED_TEXT);
+		System.out.println("\nSie haben zu viele Fehlversuche gehabt.\n\n");
+		System.out.print(ANSCI_RESET);
 		return false;
 	}
 	
 	public static void showRegistrationResults(Customer customer) {
-		System.out.println("Vielen Dank für Ihre Registrierung " + customer.getFirstName());
+		System.out.print(CYAN_TEXT);
+		System.out.println("\n\nVielen Dank für Ihre Registrierung " + customer.getFirstName());
 		System.out.println("Deine neue Kundennummer lautet " + customer.getUserId());
+		System.out.print(ANSCI_RESET);
 	}
 
 	public static User[] showMenu(User user, User[] users, Car[] cars) {
@@ -115,11 +133,23 @@ public final class Gui {
 			try {
 				int choice = InputUtility.getUserChoiceForMenu(user);
 				if (choice == 1) {
-					System.out.println("Sie haben sich erfolgreich ausgelogt");
+					System.out.print(GREEN_TEXT);
+					System.out.println("Sie haben sich erfolgreich ausgeloggt\n\n");
+					System.out.print(ANSCI_RESET);
 					break;
 
 				} else if (choice == 2) {
+					System.out.print(CYAN_TEXT);
+					System.out.println("\nDeine aktuelle Kundendaten:");
+					System.out.print(ANSCI_RESET);
+					if (user instanceof Customer) {
+						System.out.println((Customer) user + "\n");
+					} else {
+						System.out.println((Administrator) user + "\n");
+					}
+					
 					UserManagement.changeData(user);
+					Gui.showUserChangeSuccessMessage(user);
 					Utility.writeUsersToFile(users);
 
 				} else if (choice == 3) {
@@ -127,8 +157,6 @@ public final class Gui {
 						users = deleteUser(users);
 						Utility.writeUsersToFile(users);
 					} else {
-						//TODO if time: this should be in a separate method
-						// for example Utility.sellProduct();
 						showProduct(cars);
 						Car car = InputUtility.getDesiredProduct(cars, "kaufen");
 						menge = InputUtility.getNumberOfProducts();
@@ -159,7 +187,9 @@ public final class Gui {
 	}
 
 	public static void showProduct(Car[] carArray) {
-		System.out.println("\n\n\nDiese Autos stehen zur Verfügung:");
+		System.out.print(CYAN_TEXT);
+		System.out.println("\n\n\nDiese Autos stehen zur Verfügung:\n\n");
+		System.out.print(ANSCI_RESET);
 		for (int i = 0; i < carArray.length; i++) {
 			showProduct(carArray[i]);
 		}
@@ -181,7 +211,8 @@ public final class Gui {
 	}
 	
 	public static User[] deleteUser(User[] users) {
-		System.out.println("Welchen Kunden möchten Sie löschen?\n");
+		System.out.print(CYAN_TEXT);
+		System.out.println("Welchen Kunden möchten Sie löschen?\n\n");
 		int userId = InputUtility.getUserIdInput();
 		String firstName = InputUtility.getFirstNameInput();
 		String lastName = InputUtility.getSurnameInput();
@@ -195,9 +226,13 @@ public final class Gui {
 	 */
 	public static void verabschiedung(User user) {
 		if (user == null) {
-			System.out.println("\n\n\nVielen Dank für Ihren Besuch.");
+			System.out.print(PURPLE_TEXT);
+			System.out.println("\n\n\nVielen Dank für Ihren Besuch.\n\n");
+			System.out.print(ANSCI_RESET);
 		} else {
-			System.out.println("\n\n\nVielen Dank für Ihren Besuch " + user.getFirstName() + "!\n");
+			System.out.print(PURPLE_TEXT);
+			System.out.println("\n\n\nVielen Dank für Ihren Besuch " + user.getFirstName() + "!\n\n");
+			System.out.print(ANSCI_RESET);
 		}
 	}
 
@@ -210,7 +245,9 @@ public final class Gui {
 		sb.append(String.format("Danke %s für Ihren Einkauf!%n%n", customer.getFirstName()));
 		
 		if (customerIsPremium) {
+			System.out.print(GREEN_TEXT);
 			sb.append(String.format("Sie sind ein Premium Kunde! Vielen Dank für Ihre Treue.%n%n", customer.getUserType().germanText));
+			System.out.print(ANSCI_RESET);
 		}
 		
 		sb.append("Hiermit stellen wir Ihnen die folgenden Produkte in Rechnung:\n");
@@ -270,16 +307,23 @@ public final class Gui {
 	}
 	
 	public static void showUserDeletionSuccessMessage() {
+		System.out.print(GREEN_TEXT);
 		System.out.println("Sie haben den Kunden erfolgreich gelöscht.");
+		System.out.print(ANSCI_RESET);
 	}
 	
 	public static void showProductChangeSuccessMessage(Car car) {
+		System.out.print(GREEN_TEXT);
 		System.out.println("Sie haben die Fahrzeugdaten erfolgreich geändert:");
+		System.out.print(ANSCI_RESET);
 		System.out.println(car);
+		
 	}
 	
 	public static void showUserChangeSuccessMessage(User user) {
+		System.out.print(GREEN_TEXT);
 		System.out.println("Sie haben die Userdaten erfolgreich geändert:");
+		System.out.print(ANSCI_RESET);
 		if (user instanceof Customer) {
 			Customer customer = (Customer) user;
 			System.out.println(customer);
@@ -292,28 +336,42 @@ public final class Gui {
 	}
 	
 	public static void showProductDoesNotExist() {
-		System.out.println("Diese Produktnummer existiert nicht. Bitte versuchen Sie es erneut.");
+		System.out.print(RED_TEXT);
+		System.out.println("Diese Produktnummer existiert nicht. Bitte versuchen Sie es erneut.\n\n");
+		System.out.print(ANSCI_RESET);
 	}
 	
 	public static void showNoAccessErrorMessage() {
-		System.out.println("Sie haben nicht die erforderlichen Rechte, um diese Option zu verwenden.");
+		System.out.print(RED_TEXT);
+		System.out.println("Sie haben nicht die erforderlichen Rechte, um diese Option zu verwenden.\n\n");
+		System.out.print(ANSCI_RESET);
 	}
 
 	public static void showDeleteErrorMessage() {
-		System.out.println("Der Kunde konnte nicht gelöscht werden. Bitte kontrollieren Sie Ihre Daten noch einmal."); 
+		System.out.print(RED_TEXT);
+		System.out.println("Der Kunde konnte nicht gelöscht werden. Bitte kontrollieren Sie Ihre Daten noch einmal.\n\n");
+		System.out.print(ANSCI_RESET);
 	}
 	
 	public static void showReadErrorMessage() {
-		System.out.println("Die Daten konnten nicht gelesen werden. Es werden die Backup Daten verwendet.");
+		System.out.print(RED_TEXT);
+		System.out.println("Die Daten konnten nicht gelesen werden. Es werden die Backup Daten verwendet.\n\n");
+		System.out.print(ANSCI_RESET);
 	}
 	public static void showWriteErrorMessage() {
-		System.out.println("Die Daten konnten nicht gespeichert werden. Bitte kontrollieren Sie Ihre Daten.");
+		System.out.print(RED_TEXT);
+		System.out.println("Die Daten konnten nicht gespeichert werden. Bitte kontrollieren Sie Ihre Daten.\n\n");
+		System.out.print(ANSCI_RESET);
 	}
 	public static void showInvalidInputErrorMessage () {
-		System.out.println("Ihre Eingabe ist fehlerhaft. Bitte versuchen Sie es erneut."); 
+		System.out.print(RED_TEXT);
+		System.out.println("Ihre Eingabe ist fehlerhaft. Bitte versuchen Sie es erneut.\n\n");
+		System.out.print(ANSCI_RESET);
 	}
 	
 	public static void showGeneralErrorMessage() {
-		System.out.println("Es gab ein Problem.");
+		System.out.print(RED_TEXT);
+		System.out.println("Es gab ein Problem.\n\n");
+		System.out.print(ANSCI_RESET);
 	}
 }

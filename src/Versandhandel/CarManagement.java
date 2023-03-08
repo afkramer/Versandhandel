@@ -3,8 +3,7 @@ package Versandhandel;
 public final class CarManagement {
 	public static final double TAX = 119;
 
-	// Create methode, die Produkte in der Product Array anlegt
-	@TestMethod(reason = "because I'm lazy")
+	@TestMethod(reason = "database replacement")
 	public static Car[] createCars() {
 		Car golf = new Car(12345, "Golf 7", 18999.99, "Golf 7 in Schwarz", VehicleClass.SMALL);
 		Car id3 = new Car(12346, "ID-3", 26987.98, "ID-3 in Pink", VehicleClass.MIDDLESIZE);

@@ -56,9 +56,9 @@ public class Customer extends User {
 		StringBuilder sb = new StringBuilder(); 
 		sb.append(super.toString());
 		sb.append("Gesamt Verkäufe: \n");
-		sb.append(this.totalSales + "\n");
+		sb.append(String.format("%,.2f€%n%n", this.totalSales));
 		sb.append("Rabatt: \n");
-		sb.append(this.discount + "\n");
+		sb.append((int) this.discount * 100  + "% \n");
 		return sb.toString();
 	}
 	
