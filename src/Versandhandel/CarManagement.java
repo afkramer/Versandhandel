@@ -43,6 +43,25 @@ public final class CarManagement {
 		} 
 	}
 	
+	public static void buyCar(Car[] cars, User[] users, User user) {
+		Gui.showProduct(cars);
+		Car car = InputUtility.getDesiredProduct(cars, "kaufen");
+		int menge;
+		while (true) {
+			menge = InputUtility.getNumberOfProducts();
+			if (menge > 0) {
+				Invoice invoice = new Invoice( (Customer) user, car, menge);
+				Gui.showInvoice((Customer) user, car, invoice);
+				Utility.writeUsersToFile(users);
+				
+				break;
+				
+			} else {
+				Gui.showInvalidInputErrorMessage();
+			}
+		}
+	}
+	
 	
 	/**
 	 * Die Methode berechnet die Mehrwertsteuer.

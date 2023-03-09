@@ -40,7 +40,7 @@ public final class Utility {
 					users[i] = parseCustomerFromFields(fields);
 				}
 			}
-		} catch (IOException e) {
+		} catch (IOException | IndexOutOfBoundsException e) {
 			users = UserManagement.createCustomers();
 			Gui.showReadErrorMessage();
 		}
@@ -80,12 +80,12 @@ public final class Utility {
 				writer.write(car.toCSVFormat()); 
 				writer.newLine();
 			}
-		} catch (IOException e){
+		} catch (IOException e) {
 			Gui.showWriteErrorMessage(); 
 		}
 	}
 	
-	public static Car[] readCarsFromFile () {
+	public static Car[] readCarsFromFile() {
 		Car[] cars = null;
 		try (BufferedReader reader = Files.newBufferedReader(Paths.get(CAR_CSV_PATH))) {
 			int amountLines = (int) Files.lines(Paths.get(CAR_CSV_PATH)).count();
@@ -96,7 +96,7 @@ public final class Utility {
 				cars[i] = new Car( Integer.parseInt(fields[0]), fields[1], Double.parseDouble(fields[2]), fields[3], VehicleClass.parseVehicleClassFromGermanText(fields[4]));  
 			}
 			
-		} catch (IOException e){
+		} catch (IOException e) {
 			Gui.showReadErrorMessage();
 			cars = CarManagement.createCars(); 
 		}	

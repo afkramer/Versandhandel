@@ -16,7 +16,6 @@ public class UserManagement {
 		return assignCustomerNumber(max, mareike, lara, fran);
 	}
 
-	//TODO: show the new customer number!
 	public static Customer registerCustomer(User[] users) {
 		String firstName = InputUtility.getFirstNameInput();
 		String surname = InputUtility.getSurnameInput();
@@ -92,7 +91,6 @@ public class UserManagement {
 		return null;
 	}
 
-	//TODO: show what the results of the update are
 	public static void changeData(User user) {
 		int choice;
 		while (true) {
@@ -122,10 +120,13 @@ public class UserManagement {
 	}
 
 
-	public static User[] deleteUser(String firstName, String lastName, int userId, User[] users){
+	public static User[] deleteUser(String firstName, String lastName, int userId, User[] users, User currentUser){
 		User user = returnUserByUserId(userId, users);
 		
-		if (user != null && user.getFirstName().equals(firstName) && user.getSurname().equals(lastName)){
+		if (currentUser.getUserId() == userId) {
+			Gui.showCanNotDeleteSelfErrorMessage();
+			return users;
+		} else if (user != null && user.getFirstName().equals(firstName) && user.getSurname().equals(lastName)){
 			User[] newUsers = new User[users.length - 1]; 
 			int newIndex = 0; 
 			for (int i = 0; i < users.length; i++) { 

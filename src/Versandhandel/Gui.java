@@ -151,14 +151,10 @@ public final class Gui {
 
 				} else if (choice == 3) {
 					if (userType.equals(UserType.ADMINISTRATOR)) {
-						users = deleteUser(users);
+						users = deleteUser(users, user);
 						Utility.writeUsersToFile(users);
 					} else {
-						showProduct(cars);
-						Car car = InputUtility.getDesiredProduct(cars, "kaufen");
-						menge = InputUtility.getNumberOfProducts();
-						Invoice invoice = new Invoice( (Customer) user, car, menge);
-						showInvoice((Customer) user, car, invoice);
+						CarManagement.buyCar(cars, users, user);
 					}
 					
 				} else if (choice == 4){
@@ -207,13 +203,13 @@ public final class Gui {
 		System.out.println();
 	}
 	
-	public static User[] deleteUser(User[] users) {
+	public static User[] deleteUser(User[] users, User currentUser) {
 		System.out.print(CYAN_TEXT);
 		System.out.println("Welchen Kunden möchten Sie löschen?\n\n");
 		int userId = InputUtility.getUserIdInput();
 		String firstName = InputUtility.getFirstNameInput();
 		String lastName = InputUtility.getSurnameInput();
-		return UserManagement.deleteUser(firstName, lastName, userId, users);
+		return UserManagement.deleteUser(firstName, lastName, userId, users, currentUser);
 	}
 
 	/**
@@ -335,6 +331,12 @@ public final class Gui {
 	public static void showProductDoesNotExist() {
 		System.out.print(RED_TEXT);
 		System.out.println("Diese Produktnummer existiert nicht. Bitte versuchen Sie es erneut.\n\n");
+		System.out.print(ANSCI_RESET);
+	}
+	
+	public static void showCanNotDeleteSelfErrorMessage() {
+		System.out.print(RED_TEXT);
+		System.out.println("Du kannst Dich selbst nicht löschen!\n\n");
 		System.out.print(ANSCI_RESET);
 	}
 	

@@ -59,7 +59,7 @@ public class Car {
 		this.category = category;
 	}
 
-	public String toString(){
+	public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Modell: \n");
         sb.append(this.productNumber + " " + this.productName + "\n");
@@ -74,7 +74,7 @@ public class Car {
     
     }
 
-    public String toCSVFormat(){
+    public String toCSVFormat() {
         return productNumber + ";" + productName + ";" + productPrice + ";" + productDescription + ";" + this.category.category + ";";
     }
 
