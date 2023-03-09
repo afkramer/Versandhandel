@@ -50,6 +50,32 @@ public class InputUtility {
 		return output;
 	}
 
+	public static int getUserFieldToChange(User user) {
+		while (true) {
+			System.out.print(Gui.CYAN_TEXT);
+			System.out.println("Welche Kundendaten möchten Sie ändern?\n");
+			System.out.print(Gui.ANSCI_RESET);
+			System.out.println("0) Zurück zum Hauptmenü\n");
+			
+			System.out.println("1) Vorname");
+			System.out.println("2) Nachname");
+			System.out.println("3) Straße");
+			System.out.println("4) Hausnummer");
+			System.out.println("5) Postleitzahl");
+			System.out.println("6) Stadt");
+			
+			if (user.getUserType().equals(UserType.ADMINISTRATOR)) {
+				System.out.println("7) Passwort");
+			}
+			
+			try {
+				return Integer.parseInt(sc.nextLine());
+			} catch (NumberFormatException nfe) {
+				Gui.showInvalidInputErrorMessage(); 
+			}
+		}
+	}
+	
 	public static String getFirstNameInput() {
 		System.out.print(Gui.CYAN_TEXT);
 		System.out.println("Vorname:");
@@ -99,7 +125,23 @@ public class InputUtility {
 		return sc.nextLine();
 	}
 
-	
+	public static int getCarFieldToChange() {
+		while(true) {
+			System.out.print(Gui.CYAN_TEXT);
+			System.out.println("Welche Fahrzeugdaten möchten Sie ändern?\n");
+			System.out.print(Gui.ANSCI_RESET);
+			System.out.println("0) Zurück zum Hauptmenü\n");
+			
+			System.out.println("1) Fahrzeugname");
+			System.out.println("2) Fahrzeugpreis");
+			System.out.println("3) Fahrzeugbeschreibung");
+			try {
+				return Integer.parseInt(sc.nextLine());
+			} catch (NumberFormatException nfe) {
+				Gui.showInvalidInputErrorMessage();
+			}
+		}
+	}
 	
 	public static String getCarNameInput() {
 		System.out.print(Gui.CYAN_TEXT);
@@ -108,7 +150,6 @@ public class InputUtility {
 		return sc.nextLine();
 	}
 	
-	//TODO: error handling!
 	public static double getCarPriceInput() {
 		while(true) {
 			System.out.print(Gui.CYAN_TEXT);
@@ -131,8 +172,6 @@ public class InputUtility {
 		return sc.nextLine();
 	}
 	
-	
-	//TODO: error handling
 	public static int getUserIdInput() {
 		while(true) {
 			System.out.print(Gui.CYAN_TEXT);
@@ -213,55 +252,5 @@ public class InputUtility {
 				Gui.showInvalidInputErrorMessage();
 			}
 		}
-
 	}
-
-	//TODO: put this closer to the methods that have to do with updating the customer
-	//TODO: change method definition to include UserType parameter
-	//TODO: based on user type, also allow the user to change password (if Admin)
-	//TODO: check where else we need to allow the user to select choice 8 (change password)
-	public static int getUserFieldToChange(User user) {
-		while (true) {
-			System.out.print(Gui.CYAN_TEXT);
-			System.out.println("Welche Kundendaten möchten Sie ändern?\n");
-			System.out.print(Gui.ANSCI_RESET);
-			System.out.println("0) Zurück zum Hauptmenü\n");
-			
-			System.out.println("1) Vorname");
-			System.out.println("2) Nachname");
-			System.out.println("3) Straße");
-			System.out.println("4) Hausnummer");
-			System.out.println("5) Postleitzahl");
-			System.out.println("6) Stadt");
-			
-			if (user.getUserType().equals(UserType.ADMINISTRATOR)) {
-				System.out.println("7) Passwort");
-			}
-			
-			try {
-				return Integer.parseInt(sc.nextLine());
-			} catch (NumberFormatException nfe) {
-				Gui.showInvalidInputErrorMessage(); 
-			}
-		}
-	}
-	
-	public static int getCarFieldToChange() {
-		while(true) {
-			System.out.print(Gui.CYAN_TEXT);
-			System.out.println("Welche Fahrzeugdaten möchten Sie ändern?\n");
-			System.out.print(Gui.ANSCI_RESET);
-			System.out.println("0) Zurück zum Hauptmenü\n");
-			
-			System.out.println("1) Fahrzeugname");
-			System.out.println("2) Fahrzeugpreis");
-			System.out.println("3) Fahrzeugbeschreibung");
-			try {
-				return Integer.parseInt(sc.nextLine());
-			} catch (NumberFormatException nfe) {
-				Gui.showInvalidInputErrorMessage();
-			}
-		}
-	}
-
 }

@@ -1,6 +1,5 @@
 package Versandhandel;
 
-//TODO: rename Customer[] and Customer to user? We should have User arrays
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -14,8 +13,6 @@ public final class Utility {
 	
 	private Utility() { }
 	
-	//TODO: is this going to work correctly?
-	//  Will the correct toCSVFormat method be used based on whether it is a customer or an admin?
 	public static void writeUsersToFile(User[] users) {
 		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(CUSTOMER_CSV_PATH))) {
 
@@ -50,7 +47,6 @@ public final class Utility {
 		return users;
 	}
 	
-	//TODO: a lot of redundancy here! How can I combine this?
 	public static Customer parseCustomerFromFields(String[] fields) {
 		int userId = Integer.parseInt(fields[0]);
 		UserType userType = UserType.parseUserTypeFromGermanText(fields[1]);

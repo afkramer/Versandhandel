@@ -1,8 +1,5 @@
 package Versandhandel;
 
-//TODO: make the output look nicer!
-//TODO: wollen wir wirklich immer, dass der Kunde Enter drucken muss?
-
 public final class Gui {
 	
 	public static final String CYAN_TEXT = "\u001B[36m";

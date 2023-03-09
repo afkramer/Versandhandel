@@ -1,7 +1,5 @@
 package Versandhandel;
 
-//TODO: double check the logic of how to calculate the net price and how the rebate should work
-
 public class Invoice {
 	private Customer customer;
 	private int quantity;
