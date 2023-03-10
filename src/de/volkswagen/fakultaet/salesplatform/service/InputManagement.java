@@ -108,7 +108,8 @@ public class InputManagement {
 			System.out.println("Hausnummer:");
 			System.out.print(Gui.ANSCI_RESET);
 			String houseNumber = sc.nextLine();
-			if (houseNumber.matches("^[0-9]") && houseNumber.matches("")) {
+			//TODO: continue here -> create a utility class with methods to check for regex strings
+			if (houseNumber.matches("^[0-9]")) {
 				return houseNumber;
 			} else {
 				Gui.showInvalidInputErrorMessage();
