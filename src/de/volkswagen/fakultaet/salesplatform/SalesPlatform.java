@@ -38,6 +38,6 @@ public class SalesPlatform {
 			}
 		}
 		
-		Gui.verabschiedung(user);
+		Gui.showFarewell(user);
 	}
 }

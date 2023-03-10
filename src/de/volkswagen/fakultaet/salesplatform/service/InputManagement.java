@@ -103,10 +103,17 @@ public class InputManagement {
 	}
 
 	public static String getHouseNumberInput() {
-		System.out.print(Gui.CYAN_TEXT);
-		System.out.println("Hausnummer:");
-		System.out.print(Gui.ANSCI_RESET);
-		return sc.nextLine();
+		while (true) {
+			System.out.print(Gui.CYAN_TEXT);
+			System.out.println("Hausnummer:");
+			System.out.print(Gui.ANSCI_RESET);
+			String houseNumber = sc.nextLine();
+			if (houseNumber.matches("^[0-9]") && houseNumber.matches("")) {
+				return houseNumber;
+			} else {
+				Gui.showInvalidInputErrorMessage();
+			}
+		}
 	}
 
 	public static String getZipCodeInput() {

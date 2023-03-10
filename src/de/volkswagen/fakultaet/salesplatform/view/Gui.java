@@ -228,7 +228,7 @@ public final class Gui {
 	 *
 	 * @param kundennummer Die dem Kunden zugeteilte Nummer.
 	 */
-	public static void verabschiedung(User user) {
+	public static void showFarewell(User user) {
 		if (user == null) {
 			System.out.print(PURPLE_TEXT);
 			System.out.println("\n\n\nVielen Dank für Ihren Besuch.\n\n");
