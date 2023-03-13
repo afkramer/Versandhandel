@@ -2,6 +2,7 @@ package de.volkswagen.fakultaet.salesplatform.model;
 
 public class Administrator extends User {
 	
+	private static int counter = 0; 
 	private String password;
 	
 	public Administrator(int userId, UserType userType, String firstName, String surname, String street, String houseNumber, String zipCode, String city, String password) {
@@ -16,6 +17,10 @@ public class Administrator extends User {
 	public Administrator (String firstName, String surname, String street, String houseNumber, String zipCode, String city) {
 		this(0, firstName, surname, street, houseNumber, zipCode, city);
 	}
+	
+	public static int getNumberOfInstances() {
+		counter++; 
+	}; 
 	
 	public String getPassword() {
 		return this.password;

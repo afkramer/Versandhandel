@@ -1,6 +1,6 @@
 package de.volkswagen.fakultaet.salesplatform.model;
 
-public class User {
+public abstract class User {
 	private int userId; 
 	
 	private UserType userType;
@@ -36,6 +36,8 @@ public class User {
 	public User(UserType userType, String firstName, String surname, String street, String houseNumber, String zipCode, String city){ 
 		this(0, userType, firstName, surname, street, houseNumber, zipCode, city);
 	}
+	
+	public abstract int getNumberOfInstances();
 	
 	public int getUserId() {
 		return this.userId; 
