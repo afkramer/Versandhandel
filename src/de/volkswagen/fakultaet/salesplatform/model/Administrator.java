@@ -8,6 +8,7 @@ public class Administrator extends User {
 	public Administrator(int userId, UserType userType, String firstName, String surname, String street, String houseNumber, String zipCode, String city, String password) {
 		super(userId, userType, firstName, surname, street, houseNumber, zipCode, city);
 		this.password = password;
+		counter++;
 	}
 	
 	public Administrator(int userId, String firstName, String surname, String street, String houseNumber, String zipCode, String city) {
@@ -18,9 +19,9 @@ public class Administrator extends User {
 		this(0, firstName, surname, street, houseNumber, zipCode, city);
 	}
 	
-	public static int getNumberOfInstances() {
-		counter++; 
-	}; 
+	public int getNumberOfInstances() {
+		return counter;
+	}
 	
 	public String getPassword() {
 		return this.password;

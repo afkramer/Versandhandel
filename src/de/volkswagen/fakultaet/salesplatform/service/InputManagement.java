@@ -69,7 +69,7 @@ public class InputManagement {
 			System.out.println("5) Postleitzahl");
 			System.out.println("6) Stadt");
 			
-			if (user.getUserType().equals(UserType.ADMINISTRATOR)) {
+			if (user.getUserType() == UserType.ADMINISTRATOR) {
 				System.out.println("7) Passwort");
 			}
 			
@@ -207,7 +207,7 @@ public class InputManagement {
 			System.out.print(Gui.ANSCI_RESET);
 			System.out.println("Drücken Sie die Taste 1, um sich auszuloggen.");
 			System.out.println("Drücken Sie die Taste 2, um Ihre Angaben zu ändern.");
-			if (user.getUserType().equals(UserType.ADMINISTRATOR)) {
+			if (user.getUserType() == UserType.ADMINISTRATOR) {
 				System.out.println("Drücken Sie die Taste 3, wenn Sie einen User löschen möchten.");
 				System.out.println("Drücken Sie die Taste 4, wenn Sie Produktdaten anpassen möchten.");
 			} else {
